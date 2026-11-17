@@ -1,170 +1,228 @@
 <!DOCTYPE html>
 <html lang="ja"><head><meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <title>ライフリセット冒険記</title>
-<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Cinzel:wght@600;800&family=Shippori+Mincho:wght@500;700;800&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#030813;--cd:#071530;--ink:#e8f3ff;--mu:#8fb0d6;--ln:#1a3f75;--ac:#4cc9ff;--a2:rgba(63,169,255,.16);--or:#ff4d6d;--rd:#ff6b81;--gd:#3fa9ff;--sky:radial-gradient(ellipse at 50% 0%,rgba(40,110,255,.32),transparent 60%),radial-gradient(circle at 88% 92%,rgba(120,60,255,.18),transparent 50%),radial-gradient(circle at 6% 66%,rgba(0,200,255,.09),transparent 45%);color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#030813}}
-:root[data-theme="dark"]{--bg:#030813}
+:root{--rgb:63,169,255;--ac:#4cc9ff;--lt:#7fd8ff;--p1:#38a0ff;--p2:#1a5fd0;--ink:#e8f3ff;--mu:#8fb0d6;--bg:#030813;--or:#ff4d6d;--rd:#ff6b81;--gl:.3;--ln:rgba(var(--rgb),.3);--a2:rgba(var(--rgb),.16);--sky:radial-gradient(ellipse at 50% 0%,rgba(var(--rgb),.32),transparent 60%),radial-gradient(circle at 88% 92%,rgba(120,60,255,.14),transparent 50%),radial-gradient(circle at 6% 66%,rgba(var(--rgb),.1),transparent 45%);color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+/* rank palettes: system theme */
+:root[data-th="sys"][data-rk="E"]{--rgb:110,150,205;--ac:#8fb6e6;--lt:#cfe1f7;--p1:#6f98d0;--p2:#3d5f96;--gl:.12}
+:root[data-th="sys"][data-rk="D"]{--rgb:60,200,130;--ac:#5fe3a0;--lt:#a9f5cf;--p1:#3fcf8c;--p2:#1c8a5a;--gl:.2}
+:root[data-th="sys"][data-rk="B"]{--rgb:150,110,255;--ac:#b48cff;--lt:#d9c6ff;--p1:#9a6cff;--p2:#5d35c8;--gl:.4}
+:root[data-th="sys"][data-rk="A"]{--rgb:255,160,60;--ac:#ffb454;--lt:#ffd9a3;--p1:#ff9f3a;--p2:#c9680f;--gl:.5}
+:root[data-th="sys"][data-rk="S"]{--rgb:255,84,112;--ac:#ff5470;--lt:#ffb3c0;--p1:#ff4a6a;--p2:#b8173a;--gl:.7}
+/* hunter theme palette */
+:root[data-th="hunt"]{--rgb:205,150,70;--ac:#e0b050;--lt:#f3dc9a;--p1:#e6b650;--p2:#a8742a;--ink:#f1e3c4;--mu:#c2ab82;--bg:#140d07;--or:#d9482e;--rd:#e5604a;--sky:radial-gradient(ellipse at 50% 0%,rgba(214,150,70,.3),transparent 60%),radial-gradient(circle at 92% 88%,rgba(150,40,30,.22),transparent 50%),radial-gradient(circle at 6% 70%,rgba(80,120,50,.12),transparent 45%)}
+:root[data-th="hunt"][data-rk="E"]{--ac:#b59a6a;--lt:#dcc9a0;--p1:#b8955a;--p2:#7a5a2c;--gl:.1}
+:root[data-th="hunt"][data-rk="D"]{--ac:#c8a45a;--lt:#ead3a0;--p1:#c9a24e;--p2:#8c6528;--gl:.2}
+:root[data-th="hunt"][data-rk="B"]{--ac:#ecbc54;--lt:#f8e2a8;--p1:#f0c256;--p2:#b27d28;--gl:.4}
+:root[data-th="hunt"][data-rk="A"]{--ac:#f6c95e;--lt:#fff0c0;--p1:#f8d064;--p2:#c28a2a;--gl:.5}
+:root[data-th="hunt"][data-rk="S"]{--ac:#ffd86e;--lt:#fff6d0;--p1:#ffe07a;--p2:#d49a30;--gl:.7}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
-*{box-sizing:border-box}
-@keyframes sp{to{transform:translate(-50%,-50%) rotate(360deg)}}
-body::before{content:"";position:fixed;left:50%;top:32%;width:560px;height:560px;transform:translate(-50%,-50%);border-radius:50%;border:2px dashed var(--gd);outline:1px solid var(--gd);outline-offset:-36px;opacity:.12;pointer-events:none;animation:sp 120s linear infinite}
-body{margin:0;background:var(--bg);background-image:var(--sky);background-attachment:fixed;color:var(--ink);font:500 15px/1.6 'Noto Sans JP','Hiragino Sans',system-ui,sans-serif;letter-spacing:.02em;-webkit-tap-highlight-color:transparent}
+*{box-sizing:border-box;scrollbar-width:thin;scrollbar-color:#2a5aa0 transparent}
+html,body{touch-action:pan-x pan-y}
+body{margin:0;background-color:var(--bg);background-image:var(--sky);background-attachment:fixed;color:var(--ink);font:500 15px/1.6 'Noto Sans JP','Hiragino Sans',system-ui,sans-serif;letter-spacing:.02em;-webkit-tap-highlight-color:transparent}
+body::before{content:"";position:fixed;left:50%;top:32%;width:560px;height:560px;transform:translate(-50%,-50%);border-radius:50%;border:2px dashed var(--ac);outline:1px solid var(--ac);outline-offset:-36px;opacity:.12;pointer-events:none;animation:sp 120s linear infinite}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;background:repeating-linear-gradient(0deg,rgba(120,180,255,.035) 0 1px,transparent 1px 3px),radial-gradient(ellipse at 50% 120%,rgba(0,0,0,.55),transparent 60%)}
+::selection{background:rgba(var(--rgb),.35)}
 #app{max-width:480px;margin:0 auto;padding:12px 14px 92px;position:relative;z-index:1}
-.hero{background:linear-gradient(180deg,rgba(10,30,66,.88),rgba(4,12,30,.92));color:#e8f3ff;border:1px solid #3fa9ff;box-shadow:0 0 0 1px rgba(63,169,255,.25),0 0 28px rgba(40,130,255,.35),inset 0 0 24px rgba(40,130,255,.15);border-radius:3px;padding:18px;margin-bottom:12px;display:grid;grid-template-columns:auto 1fr;gap:4px 14px;align-items:center}
-.lv{color:#fff;text-shadow:0 0 6px #4cc9ff,0 0 22px rgba(76,201,255,.7);font-weight:900;font-size:56px;line-height:1;letter-spacing:-.04em;grid-row:span 2}
+.hero{position:relative;overflow:hidden;display:grid;grid-template-columns:auto 1fr auto;gap:6px 12px;align-items:center;padding:14px;margin-bottom:12px;color:var(--ink);background:linear-gradient(180deg,rgba(var(--rgb),.22),rgba(3,8,20,.95));border:1px solid var(--ac);border-radius:3px;box-shadow:0 0 0 1px rgba(var(--rgb),.2),0 0 32px rgba(var(--rgb),var(--gl)),inset 0 1px 0 rgba(255,255,255,.25),inset 0 0 28px rgba(var(--rgb),.14)}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,rgba(160,220,255,.12) 50%,transparent 60%);transform:translateX(-100%);animation:sw 7s ease-in-out infinite;pointer-events:none}
+.lv{font:900 46px/1 'Rajdhani','Noto Sans JP',sans-serif;letter-spacing:-.04em;color:#fff;text-shadow:0 0 6px var(--ac),0 0 22px rgba(var(--rgb),.7);animation:gl2 3.2s ease-in-out infinite}
 .lv small{font-size:13px;font-weight:700;letter-spacing:0;margin-right:2px;opacity:.7}
-.hn{font-weight:700}.ht{font-size:12px;opacity:.7}
-.hero .bar{grid-column:1/-1;background:rgba(255,255,255,.18);margin-top:6px}
-.hero .bar i{background:linear-gradient(90deg,#1e78ff,#6ee0ff);box-shadow:0 0 10px #4cc9ff}
-.chips{grid-column:1/-1;display:flex;gap:8px;font-size:13px;font-weight:700;margin-top:4px}
-.chips span{background:rgba(63,169,255,.12);border:1px solid rgba(63,169,255,.45);border-radius:2px;padding:2px 10px}
-.cd{background:linear-gradient(180deg,rgba(10,28,60,.8),rgba(4,12,30,.88));border:1px solid rgba(63,169,255,.7);box-shadow:0 0 18px rgba(40,130,255,.22),inset 0 0 20px rgba(40,130,255,.1);border-radius:3px;padding:17px;margin-bottom:14px;position:relative}
-.cd::before,.cd::after{content:"";position:absolute;width:12px;height:12px;pointer-events:none;border:2px solid #7fd8ff}
-.cd::before{left:-2px;top:-2px;border-right:0;border-bottom:0}.cd::after{right:-2px;bottom:-2px;border-left:0;border-top:0}
-h3,.hn,.lv,.big{font-family:'Rajdhani','Noto Sans JP',sans-serif}
-h3{margin:-17px -17px 12px;padding:8px 17px;font-size:15px;font-weight:700;letter-spacing:.12em;background:linear-gradient(90deg,rgba(63,169,255,.3),transparent);border-bottom:1px solid rgba(63,169,255,.5);color:#bfe8ff;text-shadow:0 0 8px rgba(76,201,255,.8)}
-h3::before{content:"[ "}h3::after{content:" ]"}
-
-small,.mu{color:var(--mu);font-size:12px}
+.hn{font-weight:700}
+.ht{font-size:12px;opacity:.7}
 .hero small{color:inherit}
-.btn{font:inherit;font-weight:700;border:1px solid #3fa9ff;background:rgba(20,70,150,.3);box-shadow:0 0 10px rgba(63,169,255,.25);color:var(--ink);border-radius:2px;padding:8px 12px;cursor:pointer;min-height:40px}
-.btn:focus-visible,.in:focus-visible,.nv button:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
-.pri{background:linear-gradient(180deg,#2d8cff,#1457c8);border-color:#7fd8ff;color:#fff;text-shadow:0 0 6px rgba(0,0,0,.4)}
-.on{background:var(--a2);border-color:var(--ac);color:var(--ac)}
-.sm{padding:4px 9px;min-height:32px}
-.bar{height:8px;background:rgba(63,169,255,.15);border:1px solid rgba(63,169,255,.35);border-radius:1px;overflow:hidden}
-.bar i{display:block;height:100%;background:linear-gradient(90deg,#1e78ff,var(--ac));box-shadow:0 0 8px var(--ac);transition:width .35s}
-.or i{background:linear-gradient(90deg,#b3123a,var(--or));box-shadow:0 0 8px var(--or)}
-.in{font:inherit;width:100%;padding:9px 10px;border:1px solid rgba(63,169,255,.5);border-radius:2px;background:rgba(2,10,26,.75);color:var(--ink);min-height:40px}
-.rw{display:flex;align-items:center;gap:10px}.g1{flex:1;min-width:0}.sp{justify-content:space-between}
-.q{padding:9px 0;border-top:1px solid var(--ln)}.q:first-of-type{border-top:0}
-.q.dn .t{text-decoration:line-through;color:var(--mu)}
-.ck{width:30px;height:30px;border-radius:2px;border:2px solid var(--ac);box-shadow:0 0 8px rgba(76,201,255,.5);background:none;color:#fff;font-weight:900;cursor:pointer;flex:none}
-.dn .ck{background:var(--ac)}
-.gr{display:grid;gap:8px}.g3{grid-template-columns:repeat(3,1fr)}.g2{grid-template-columns:1fr auto}
-.big{font-size:30px;font-weight:900;letter-spacing:-.02em;line-height:1.1}
-.bx{text-align:center;padding:8px 4px;border-radius:6px;background:var(--a2);border:1px solid var(--ln)}
+.hero .bar{grid-column:1/-1;margin-top:2px}
+.hero .bar i{background:linear-gradient(90deg,var(--p2),var(--lt));box-shadow:0 0 10px var(--ac)}
+.chips{display:flex;gap:8px;margin:0;font:700 14px 'Rajdhani','Noto Sans JP',sans-serif}
+.chips span{display:inline-flex;align-items:center;gap:4px;padding:2px 10px;background:rgba(var(--rgb),.12);border:1px solid rgba(var(--rgb),.45);border-radius:2px}
+.chips span:nth-child(1){color:#ffd76a}
+.chips span:nth-child(2){color:#ff9b54}
+.chips span:nth-child(3){color:#9be7ff}
+.cd{position:relative;margin-bottom:14px;padding:17px;background:linear-gradient(180deg,rgba(var(--rgb),.14),rgba(4,10,24,.88));border:1px solid rgba(var(--rgb),.45);border-radius:3px;box-shadow:0 10px 26px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.08),inset 0 0 22px rgba(var(--rgb),.07)}
+.cd::before,.cd::after{content:"";position:absolute;width:12px;height:12px;pointer-events:none;border:2px solid var(--lt)}
+.cd::before{left:-2px;top:-2px;border-right:0;border-bottom:0}
+.cd::after{right:-2px;bottom:-2px;border-left:0;border-top:0}
+h3{margin:-17px -17px 12px;padding:8px 17px;font:700 14px 'Rajdhani','Noto Sans JP',sans-serif;letter-spacing:.14em;color:var(--lt);background:linear-gradient(90deg,rgba(var(--rgb),.3),transparent);border-bottom:1px solid rgba(var(--rgb),.45);text-shadow:0 0 6px rgba(var(--rgb),.5)}
+h3::before{content:"[ "}
+h3::after{content:" ]"}
+h3.cs{cursor:pointer;-webkit-user-select:none;user-select:none}
+h3.cs::before{content:"▾ "}
+.cd.col h3.cs::before{content:"▸ "}
+h3.cs::after{content:""}
+.cd.col h3.cs::after{content:attr(data-s);float:right;font-size:12px;letter-spacing:0;opacity:.85;text-shadow:none}
+.cd.col>:not(:first-child){display:none}
+.cd.col h3.cs{margin-bottom:-6px;border-bottom:0}
+small,.mu{color:var(--mu);font-size:12px}
 .warn{color:var(--or);font-weight:700}
-.lg{font-size:12px;color:var(--mu);padding:3px 0;border-top:1px solid var(--ln)}
-textarea.in{min-height:70px;font-size:12px}
-.nv{position:fixed;z-index:10;left:0;right:0;bottom:0;display:flex;background:rgba(3,10,26,.94);border-top:1px solid #3fa9ff;box-shadow:0 -6px 20px rgba(40,130,255,.25);padding-bottom:env(safe-area-inset-bottom,0px)}
-.nv button{flex:1;font:inherit;font-size:11px;font-weight:700;background:none;border:0;color:var(--mu);padding:9px 0 8px;cursor:pointer}
-.nv button b{display:block;font-size:19px;line-height:1.2}
-.nv .cur{color:var(--ac);text-shadow:0 0 10px var(--ac)}
-#ts{position:fixed;left:50%;top:calc(env(safe-area-inset-top,0px) + 14px);transform:translateX(-50%);background:rgba(6,18,42,.96);color:#bfe8ff;border:1px solid #3fa9ff;box-shadow:0 0 18px rgba(63,169,255,.5);padding:9px 16px;border-radius:2px;font-size:13px;font-weight:700;opacity:0;pointer-events:none;transition:opacity .2s;max-width:92vw;text-align:center;z-index:30}
-#ts.s{opacity:1}
-small,.mu,.btn,.in,.lg,.nv button,.chips{font-family:'Noto Sans JP',sans-serif}
-.btn:active{background:rgba(63,169,255,.5)}
-#ov{position:fixed;inset:0;z-index:20;display:none;align-items:center;justify-content:center;background:rgba(2,6,18,.84);padding:24px;cursor:pointer}
-#ov.s{display:flex}
-.ovb{width:100%;max-width:340px;text-align:center;border:1px solid #3fa9ff;background:linear-gradient(180deg,rgba(10,30,66,.96),rgba(4,12,30,.98));box-shadow:0 0 44px rgba(63,169,255,.55),inset 0 0 30px rgba(40,130,255,.2);padding:28px 18px;animation:pp .4s ease-out}
-.ovk{color:#7fd8ff;letter-spacing:.2em;font-size:13px}
-.ovt{font:700 34px 'Rajdhani',sans-serif;letter-spacing:.22em;color:#fff;text-shadow:0 0 8px #4cc9ff,0 0 26px #4cc9ff;margin:6px 0}
-.ovm{font:700 46px/1.15 'Rajdhani','Noto Sans JP',sans-serif;color:#bfe8ff;margin-bottom:6px}
-@keyframes pp{from{transform:scale(.88);opacity:0}}
-.fx{position:fixed;z-index:15;transform:translate(-50%,0);font:700 20px 'Rajdhani',sans-serif;color:#fff;text-shadow:0 0 8px #4cc9ff,0 0 18px #4cc9ff;pointer-events:none;animation:fl 1s ease-out forwards}
-@keyframes fl{to{transform:translate(-50%,-60px);opacity:0}}
-.rg{position:fixed;z-index:15;width:30px;height:30px;margin:-15px 0 0 -15px;border:2px solid #7fd8ff;pointer-events:none;animation:rg .7s ease-out forwards}
-@keyframes rg{to{transform:scale(3.2);opacity:0}}
-.rk{display:inline-block;margin-left:8px;padding:0 8px;border:1px solid currentColor;font:700 12px 'Rajdhani',sans-serif;letter-spacing:.1em;border-radius:2px;vertical-align:1px}
-.rE{color:#9db0c8}.rD{color:#6fe39a}.rC{color:#4cc9ff}.rB{color:#b48cff}.rA{color:#ffb454}.rS{color:#ff5470;text-shadow:0 0 8px #ff5470}
-button,select,input,textarea,[data-a]{touch-action:manipulation}
-.btn{-webkit-user-select:none;user-select:none}
-.ck{width:40px;height:40px}
-.btn.sm{min-width:40px;min-height:40px}
-.dg{border-color:var(--rd);color:var(--rd);background:rgba(255,77,109,.14)}
-#ob{position:fixed;inset:0;z-index:25;display:none;background:rgba(2,6,18,.96);padding:20px;overflow:auto}
-#ob.s{display:flex}
+.btn{font:inherit;font-weight:700;min-height:40px;padding:8px 12px;cursor:pointer;color:var(--ink);background:rgba(var(--rgb),.16);border:1px solid rgba(var(--rgb),.6);border-radius:2px;-webkit-user-select:none;user-select:none}
+.btn:hover,.btn:active{background:rgba(var(--rgb),.35)}
+.btn.sm{padding:4px 9px;min-width:40px}
+.pri{background:linear-gradient(180deg,var(--p1),var(--p2));border-color:var(--lt);color:#fff;box-shadow:0 0 14px rgba(var(--rgb),.45)}
+.pri:hover,.pri:active{background:linear-gradient(180deg,var(--lt),var(--p1))}
+.on{background:var(--a2);border-color:var(--ac);color:var(--ac)}
+.dg{background:rgba(255,77,109,.16);border-color:var(--rd);color:var(--rd)}
+.btn:focus-visible,.in:focus-visible,.nv button:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+.bar{position:relative;height:10px;overflow:hidden;background:rgba(var(--rgb),.15);border:1px solid rgba(var(--rgb),.35);border-radius:1px}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--p2),var(--ac));box-shadow:0 0 8px var(--ac);transition:width .35s}
+.bar::after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(90deg,transparent 0 11px,rgba(3,8,19,.65) 11px 12px)}
+.or i{background:linear-gradient(90deg,#b3123a,#ff4d6d);box-shadow:0 0 8px #ff4d6d}
+.in{font:inherit;font-size:16px;width:100%;min-height:40px;padding:9px 10px;color:var(--ink);background:rgba(2,10,26,.75);border:1px solid rgba(var(--rgb),.5);border-radius:2px}
+.in:focus{border-color:var(--ac);box-shadow:0 0 0 2px rgba(var(--rgb),.25)}
+.in[type=date]{display:block}
+textarea.in{min-height:70px}
 label{display:block}
+.rw{display:flex;align-items:center;gap:10px}
+.g1{flex:1;min-width:0}
+.sp{justify-content:space-between}
+.gr{display:grid;gap:8px}
+.g2{grid-template-columns:1fr auto}
+.g3{grid-template-columns:repeat(3,1fr)}
+.fw{display:flex;flex-wrap:wrap;gap:6px}
+.tc{text-align:center}
+.q{padding:9px 0;border-top:1px solid var(--ln)}
+.q:first-of-type{border-top:0}
+.q.dn{opacity:.72}
+.q.dn .t{text-decoration:line-through;color:var(--mu)}
+.ck{width:40px;height:40px;flex:none;border-radius:2px;border:2px solid var(--ac);background:none;color:#fff;font-weight:900;cursor:pointer;box-shadow:0 0 8px rgba(var(--rgb),.5)}
+.dn .ck{background:#2fd49a;border-color:#2fd49a;box-shadow:0 0 10px rgba(47,212,154,.6)}
+.big{font:700 30px/1.1 'Rajdhani','Noto Sans JP',sans-serif;letter-spacing:-.02em}
+.bx{text-align:center;padding:8px 4px;border-radius:2px;background:var(--a2);border:1px solid rgba(var(--rgb),.3)}
+.lg{font-size:12px;color:var(--mu);padding:3px 0;border-top:1px solid var(--ln)}
+.rk{display:inline-block;margin-left:8px;padding:0 8px;border:1px solid currentColor;border-radius:2px;font:700 12px 'Rajdhani',sans-serif;letter-spacing:.1em;vertical-align:1px}
+.rE{color:#9db0c8}.rD{color:#6fe39a}.rC{color:#4cc9ff}.rB{color:#b48cff}.rA{color:#ffb454}.rS{color:#ff5470;text-shadow:0 0 8px #ff5470}
 .cg{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center;margin-bottom:8px}
 .cg small{font-size:11px}
 .cg i{display:block}
-.cl{display:block;border:1px solid var(--ln);border-radius:2px;padding:6px 0;font:700 13px 'Rajdhani','Noto Sans JP',sans-serif}
+.cl{display:block;padding:6px 0;border:1px solid var(--ln);border-radius:2px;font:700 13px 'Rajdhani','Noto Sans JP',sans-serif}
 .cl.td{border-color:var(--ac);box-shadow:0 0 8px var(--ac)}
-@keyframes up{from{opacity:0;transform:translateY(10px)}}
-#mn.ani .cd{animation:up .35s ease-out both}
-@keyframes gl{50%{text-shadow:0 0 10px #4cc9ff,0 0 34px rgba(76,201,255,.95)}}
-.lv{animation:gl 3.2s ease-in-out infinite}
-.tc{text-align:center}
-.fw{display:flex;flex-wrap:wrap;gap:6px}
-/* refine */
-*{scrollbar-width:thin;scrollbar-color:#2a5aa0 transparent}
-body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;background:repeating-linear-gradient(0deg,rgba(120,180,255,.035) 0 1px,transparent 1px 3px),radial-gradient(ellipse at 50% 120%,rgba(0,0,0,.55),transparent 60%)}
-.hero{position:relative;overflow:hidden;border-color:#5ab8ff;box-shadow:0 0 0 1px rgba(63,169,255,.2),0 0 32px rgba(40,130,255,.3),inset 0 1px 0 rgba(170,225,255,.35),inset 0 0 28px rgba(40,130,255,.14)}
-.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,rgba(160,220,255,.12) 50%,transparent 60%);transform:translateX(-100%);animation:sw 7s ease-in-out infinite;pointer-events:none}
-@keyframes sw{55%,100%{transform:translateX(100%)}}
-.chips span{font-family:'Rajdhani','Noto Sans JP',sans-serif;font-size:14px}
-.chips span:nth-child(1){color:#ffd76a;border-color:rgba(255,215,106,.55);background:rgba(255,200,80,.1)}
-.chips span:nth-child(2){color:#ff9b54;border-color:rgba(255,155,84,.55);background:rgba(255,140,60,.1)}
-.chips span:nth-child(3){color:#9be7ff}
-.cd{border-color:rgba(63,169,255,.42);box-shadow:0 10px 26px rgba(0,0,0,.4),inset 0 1px 0 rgba(150,210,255,.12),inset 0 0 22px rgba(40,130,255,.07)}
-h3{font-size:14px;letter-spacing:.14em;text-shadow:0 0 6px rgba(76,201,255,.45);border-bottom-color:rgba(63,169,255,.4)}
-.btn{background:rgba(30,80,160,.22);border-color:rgba(90,175,255,.55);box-shadow:none}
-.btn:hover{background:rgba(63,169,255,.3)}
-.pri{background:linear-gradient(180deg,#38a0ff,#1a5fd0);border-color:#8fe0ff;box-shadow:0 0 14px rgba(63,169,255,.45)}
-.bar{height:10px;position:relative}
-.bar::after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(90deg,transparent 0 11px,rgba(3,8,19,.65) 11px 12px)}
-.dn .ck{background:#2fd49a;border-color:#2fd49a;box-shadow:0 0 10px rgba(47,212,154,.6)}
-.q.dn{opacity:.72}
-.bx{border-radius:2px;border-color:rgba(63,169,255,.3)}
-.nv{backdrop-filter:blur(10px);background:rgba(3,10,26,.88)}
-.nv .cur{position:relative}
+.seg{display:flex;margin-bottom:12px;border:1px solid rgba(var(--rgb),.5);border-radius:2px;overflow:hidden}
+.seg button{flex:1;min-height:44px;padding:11px 0;font:700 13px 'Noto Sans JP',sans-serif;color:var(--mu);background:rgba(var(--rgb),.08);border:0;cursor:pointer}
+.seg button+button{border-left:1px solid rgba(var(--rgb),.35)}
+.seg button.on{color:var(--lt);background:rgba(var(--rgb),.28);box-shadow:inset 0 -2px 0 var(--ac)}
+.nv{position:fixed;z-index:10;left:0;right:0;bottom:0;display:flex;background:rgba(3,10,26,.88);backdrop-filter:blur(10px);border-top:1px solid var(--ac);box-shadow:0 -6px 20px rgba(var(--rgb),.25);padding-bottom:env(safe-area-inset-bottom,0px)}
+.nv button{flex:1;padding:9px 0 8px;font:700 11px 'Noto Sans JP',sans-serif;color:var(--mu);background:none;border:0;cursor:pointer}
+.nv button b{display:block;font-size:19px;line-height:1.2}
+.nv .cur{position:relative;color:var(--ac);text-shadow:0 0 10px var(--ac)}
 .nv .cur::before{content:"";position:absolute;top:-1px;left:22%;right:22%;height:2px;background:var(--ac);box-shadow:0 0 10px var(--ac)}
-.in:focus{border-color:var(--ac);box-shadow:0 0 0 2px rgba(76,201,255,.25)}
-::selection{background:rgba(76,201,255,.35)}
-/* rank theme */
-:root{--rgb:63,169,255;--lt:#7fd8ff;--p1:#38a0ff;--p2:#1a5fd0;--a2:rgba(var(--rgb),.16);--ln:rgba(var(--rgb),.3);--sky:radial-gradient(ellipse at 50% 0%,rgba(var(--rgb),.32),transparent 60%),radial-gradient(circle at 88% 92%,rgba(120,60,255,.14),transparent 50%),radial-gradient(circle at 6% 66%,rgba(var(--rgb),.1),transparent 45%)}
-:root[data-rk="E"]{--rgb:110,150,205;--ac:#8fb6e6;--gd:#8fb6e6;--lt:#cfe1f7;--p1:#6f98d0;--p2:#3d5f96}
-:root[data-rk="D"]{--rgb:60,200,130;--ac:#5fe3a0;--gd:#43c98a;--lt:#a9f5cf;--p1:#3fcf8c;--p2:#1c8a5a}
-:root[data-rk="B"]{--rgb:150,110,255;--ac:#b48cff;--gd:#9a73ff;--lt:#d9c6ff;--p1:#9a6cff;--p2:#5d35c8}
-:root[data-rk="A"]{--rgb:255,160,60;--ac:#ffb454;--gd:#ff9f3a;--lt:#ffd9a3;--p1:#ff9f3a;--p2:#c9680f}
-:root[data-rk="S"]{--rgb:255,84,112;--ac:#ff5470;--gd:#ff5470;--lt:#ffb3c0;--p1:#ff4a6a;--p2:#b8173a}
-body::before{border-color:var(--ac);outline-color:var(--ac)}
-.hero{background:linear-gradient(180deg,rgba(var(--rgb),.22),rgba(3,8,20,.95));border-color:var(--ac);box-shadow:0 0 0 1px rgba(var(--rgb),.2),0 0 32px rgba(var(--rgb),.3),inset 0 1px 0 rgba(255,255,255,.25),inset 0 0 28px rgba(var(--rgb),.14)}
-.lv{text-shadow:0 0 6px var(--ac),0 0 22px rgba(var(--rgb),.7)}
+#ts{position:fixed;z-index:30;left:50%;top:calc(env(safe-area-inset-top,0px) + 14px);transform:translateX(-50%);max-width:92vw;padding:9px 16px;text-align:center;font-size:13px;font-weight:700;color:var(--lt);background:rgba(6,18,42,.96);border:1px solid var(--ac);border-radius:2px;box-shadow:0 0 18px rgba(var(--rgb),.5);opacity:0;pointer-events:none;transition:opacity .2s}
+#ts.s{opacity:1}
+#ov{position:fixed;inset:0;z-index:20;display:none;align-items:center;justify-content:center;padding:24px;background:rgba(2,6,18,.84);cursor:pointer}
+#ov.s{display:flex}
+#ob{position:fixed;inset:0;z-index:25;display:none;padding:12px;overflow:auto;background:rgba(2,6,18,.96)}
+#ob.s{display:flex}
+.ovb{width:100%;max-width:320px;padding:20px 16px;text-align:center;background:linear-gradient(180deg,rgba(10,30,66,.96),rgba(4,12,30,.98));border:1px solid var(--ac);box-shadow:0 0 44px rgba(var(--rgb),.55),inset 0 0 30px rgba(var(--rgb),.2);animation:pp .4s ease-out}
+.ovk{color:var(--lt);letter-spacing:.2em;font-size:13px}
+.ovt{margin:6px 0;font:700 26px 'Rajdhani','Noto Sans JP',sans-serif;letter-spacing:.16em;color:#fff;text-shadow:0 0 8px var(--ac),0 0 26px var(--ac)}
+.ovm{margin-bottom:6px;font:700 34px/1.15 'Rajdhani','Noto Sans JP',sans-serif;color:var(--lt)}
+#ob .ovb{max-width:360px;padding:16px 14px}
+#ob .ovt{font-size:22px!important;margin:2px 0}
+#ob p.mu{font-size:12px;margin:6px 0}
+#ob .gr{grid-template-columns:1fr 1fr;gap:8px}
+#ob .gr>label:first-child,#ob .gr>button{grid-column:1/-1}
+#ob label small{display:block;margin-bottom:2px}
+#ob .in{min-height:38px;padding:6px 10px}
+.fx{position:fixed;z-index:15;transform:translate(-50%,0);font:700 20px 'Rajdhani',sans-serif;color:#fff;text-shadow:0 0 8px var(--ac),0 0 18px var(--ac);pointer-events:none;animation:fl 1s ease-out forwards}
+.rg{position:fixed;z-index:15;width:30px;height:30px;margin:-15px 0 0 -15px;border:2px solid var(--lt);pointer-events:none;animation:rg .7s ease-out forwards}
+.bart{display:flex;justify-content:center;padding:6px 0;background:radial-gradient(circle at 50% 55%,color-mix(in srgb,var(--bc) 22%,transparent),transparent 62%)}
+.bs{width:112px;height:112px;overflow:visible;filter:drop-shadow(0 0 7px var(--bc));animation:bp 3.4s ease-in-out infinite}
+.bs path{fill:rgba(8,3,14,.88);stroke:var(--bc);stroke-width:1.6;stroke-linejoin:round}
+.bs .e{fill:#ffe45e;stroke:none;animation:ey 4s steps(1) infinite}
+.bs .t{fill:none}
+.bs .v{fill:#000;stroke-width:1}
+.bart.dead .bs{filter:grayscale(1) opacity(.45);animation:none}
+.fl{display:inline-block;vertical-align:-3px;transform-origin:50% 90%;animation:fk 1.2s ease-in-out infinite;filter:drop-shadow(0 0 4px #ff8a2a)}
+.fl.hot{filter:drop-shadow(0 0 6px #ffb040)}
+.fl.blue{filter:hue-rotate(195deg) saturate(1.3) drop-shadow(0 0 6px #6ad0ff)}
+#mn.ani .cd{animation:up .35s ease-out both}
+@keyframes sp{to{transform:translate(-50%,-50%) rotate(360deg)}}
+@keyframes sw{55%,100%{transform:translateX(100%)}}
 @keyframes gl2{50%{text-shadow:0 0 10px var(--ac),0 0 34px rgba(var(--rgb),.95)}}
-.lv{animation:gl2 3.2s ease-in-out infinite}
-.hero .bar i{background:linear-gradient(90deg,var(--p2),var(--lt));box-shadow:0 0 10px var(--ac)}
-.chips span{background:rgba(var(--rgb),.12);border-color:rgba(var(--rgb),.45)}
-.cd{background:linear-gradient(180deg,rgba(var(--rgb),.14),rgba(4,10,24,.88));border-color:rgba(var(--rgb),.45);box-shadow:0 10px 26px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.08),inset 0 0 22px rgba(var(--rgb),.07)}
-.cd::before,.cd::after{border-color:var(--lt)}
-h3{background:linear-gradient(90deg,rgba(var(--rgb),.3),transparent);border-bottom-color:rgba(var(--rgb),.45);color:var(--lt);text-shadow:0 0 6px rgba(var(--rgb),.5)}
-.btn{border-color:rgba(var(--rgb),.6);background:rgba(var(--rgb),.16)}
-.btn:hover,.btn:active{background:rgba(var(--rgb),.35)}
-.pri{background:linear-gradient(180deg,var(--p1),var(--p2));border-color:var(--lt);box-shadow:0 0 14px rgba(var(--rgb),.45);color:#fff}
-.bar{background:rgba(var(--rgb),.15);border-color:rgba(var(--rgb),.35)}
-.bar i{background:linear-gradient(90deg,var(--p2),var(--ac));box-shadow:0 0 8px var(--ac)}
-.or i{background:linear-gradient(90deg,#b3123a,#ff4d6d);box-shadow:0 0 8px #ff4d6d}
-.in{border-color:rgba(var(--rgb),.5)}
-.in:focus{border-color:var(--ac);box-shadow:0 0 0 2px rgba(var(--rgb),.25)}
-.nv{border-top-color:var(--ac);box-shadow:0 -6px 20px rgba(var(--rgb),.25)}
-#ts{border-color:var(--ac);color:var(--lt);box-shadow:0 0 18px rgba(var(--rgb),.5)}
-.ovb{border-color:var(--ac);box-shadow:0 0 44px rgba(var(--rgb),.55),inset 0 0 30px rgba(var(--rgb),.2)}
-.ovk,.ovm{color:var(--lt)}
-.ovt{text-shadow:0 0 8px var(--ac),0 0 26px var(--ac)}
-.fx{text-shadow:0 0 8px var(--ac),0 0 18px var(--ac)}
-.rg{border-color:var(--lt)}
+@keyframes pp{from{transform:scale(.88);opacity:0}}
+@keyframes fl{to{transform:translate(-50%,-60px);opacity:0}}
+@keyframes rg{to{transform:scale(3.2);opacity:0}}
+@keyframes up{from{opacity:0;transform:translateY(10px)}}
+@keyframes bp{50%{transform:translateY(-3px);filter:drop-shadow(0 0 12px var(--bc))}}
+@keyframes ey{0%,92%,100%{opacity:1}95%{opacity:.2}}
+@keyframes fk{50%{transform:scale(1.07,1.15) rotate(-3deg)}}
+/* hunter theme */
+[data-th=hunt] body{font-family:'Noto Sans JP','Hiragino Sans',sans-serif}
+[data-th=hunt] body::after{background:radial-gradient(ellipse at 50% 120%,rgba(0,0,0,.6),transparent 60%),repeating-linear-gradient(90deg,rgba(0,0,0,.06) 0 2px,transparent 2px 7px)}
+[data-th=hunt] h3,[data-th=hunt] .hn{font-family:'Cinzel','Shippori Mincho','Hiragino Mincho ProN',serif}
+[data-th=hunt] .lv,[data-th=hunt] .big,[data-th=hunt] .ovt,[data-th=hunt] .ovm{font-family:'Cinzel','Shippori Mincho',serif}
+[data-th=hunt] .hero{background:linear-gradient(165deg,#34241a,#181009);border:2px solid #b88a3c;border-radius:4px;box-shadow:inset 0 0 0 2px #181009,inset 0 0 0 3px rgba(214,170,90,.4),0 10px 22px rgba(0,0,0,.6),0 0 26px rgba(var(--rgb),var(--gl))}
+[data-th=hunt] .hero::after{display:none}
+[data-th=hunt] .lv{color:var(--lt);text-shadow:0 2px 0 #4a2f0e,0 0 14px rgba(var(--rgb),.5);animation:none}
+[data-th=hunt] .hero .bar{background:#0c0805;border-color:#b88a3c;height:12px}
+[data-th=hunt] .hero .bar i{background:linear-gradient(180deg,#9fe05a,#4a9a2e);box-shadow:0 0 8px rgba(130,220,70,.55)}
+[data-th=hunt] .chips span{background:rgba(0,0,0,.35);border-color:#8a6a3a;border-radius:3px}
+[data-th=hunt] .chips span:nth-child(3){color:#d6f0b8}
+[data-th=hunt] .cd{background:linear-gradient(180deg,#2e2016,#1a110a);border:2px solid #9a7234;border-radius:4px;box-shadow:inset 0 0 0 2px #1a110a,inset 0 0 0 3px rgba(214,170,90,.35),0 8px 18px rgba(0,0,0,.5)}
+[data-th=hunt] .cd::before,[data-th=hunt] .cd::after{width:8px;height:8px;border:0;border-radius:50%;background:radial-gradient(circle at 35% 35%,var(--lt),#8a6420);top:6px;bottom:auto}
+[data-th=hunt] .cd::before{left:6px}
+[data-th=hunt] .cd::after{right:6px}
+[data-th=hunt] h3{background:linear-gradient(90deg,#6b4a1e,#3a2813 70%,transparent);border-bottom:1px solid #b88a3c;color:#f6e2b0;text-shadow:0 1px 0 #000;letter-spacing:.1em;padding-left:22px}
+[data-th=hunt] h3::before{content:"◆ ";color:var(--ac)}
+[data-th=hunt] h3::after{content:""}
+[data-th=hunt] h3.cs::before{content:"▾ "}
+[data-th=hunt] .cd.col h3.cs::before{content:"▸ "}
+[data-th=hunt] .q{background:linear-gradient(180deg,#eadbb4,#dcc895);color:#2b1d10;border:1px solid #8a6a3a;border-radius:2px;padding:8px 10px;margin-bottom:6px;box-shadow:0 2px 0 rgba(0,0,0,.35)}
+[data-th=hunt] .q:first-of-type{border-top:1px solid #8a6a3a}
+[data-th=hunt] .q small{color:#6b5233}
+[data-th=hunt] .q .warn{color:#a8431f}
+[data-th=hunt] .q .btn{background:linear-gradient(180deg,#4a3420,#2a1c10);color:#f1e3c4;border-color:#8a6a3a;box-shadow:none}
+[data-th=hunt] .q .btn.pri{background:linear-gradient(180deg,#eec35c,#a8742a);color:#2a1a08;border-color:#f3dc9a}
+[data-th=hunt] .q .btn.dg{background:#7a2a1c;color:#fff}
+[data-th=hunt] .q .ck{border-color:#7a5a24;box-shadow:none;background:rgba(255,255,255,.4)}
+[data-th=hunt] .q.dn{opacity:.82}
+[data-th=hunt] .q.dn .t{color:#7a6444}
+[data-th=hunt] .q.dn .ck{background:#3f8f34;border-color:#2a6a22;color:#fff}
+[data-th=hunt] .q .rk{filter:brightness(.55)}
+[data-th=hunt] .btn{background:linear-gradient(180deg,#4a3420,#2a1c10);border-color:#a38638;border-radius:3px;box-shadow:inset 0 1px 0 rgba(255,236,179,.18),0 2px 0 #0a0603}
+[data-th=hunt] .btn:hover,[data-th=hunt] .btn:active{background:linear-gradient(180deg,#5c4128,#33220f)}
+[data-th=hunt] .btn:active{transform:translateY(1px)}
+[data-th=hunt] .pri{background:linear-gradient(180deg,var(--p1),var(--p2));border-color:var(--lt);color:#2a1a08;box-shadow:inset 0 1px 0 rgba(255,255,255,.35),0 2px 0 #0a0603}
+[data-th=hunt] .on{background:rgba(224,176,80,.2);border-color:var(--ac);color:var(--lt)}
+[data-th=hunt] .dg{background:rgba(217,72,46,.25);border-color:#e5604a;color:#ffb3a3}
+[data-th=hunt] .in{background:#140d07;border-color:#8a6a3a;border-radius:3px}
+[data-th=hunt] .in:focus{border-color:var(--ac);box-shadow:0 0 0 2px rgba(224,176,80,.3)}
+[data-th=hunt] .seg{border-color:#8a6a3a;border-radius:3px}
+[data-th=hunt] .seg button{background:#241810;color:#bfa57a}
+[data-th=hunt] .seg button+button{border-left-color:#5a4222}
+[data-th=hunt] .seg button.on{background:linear-gradient(180deg,#6b4a1e,#3a2813);color:var(--lt);box-shadow:inset 0 -3px 0 var(--ac)}
+[data-th=hunt] .bar{background:#0c0805;border-color:#6a4f26;border-radius:2px}
+[data-th=hunt] .bar i{background:linear-gradient(180deg,#f0d067,#b8892a);box-shadow:none}
+[data-th=hunt] .or i{background:linear-gradient(180deg,#f0604a,#9a1f12);box-shadow:0 0 8px rgba(240,80,50,.5)}
+[data-th=hunt] .nv{background:linear-gradient(180deg,#3b2916,#1e140b);border-top:2px solid #b88a3c;box-shadow:0 -6px 16px rgba(0,0,0,.6);backdrop-filter:none}
+[data-th=hunt] .nv button{color:#bfa57a}
+[data-th=hunt] .nv .cur{color:var(--lt);text-shadow:0 0 8px rgba(var(--rgb),.6)}
+[data-th=hunt] #ts{background:#e8d7ae;color:#2b1d10;border:2px solid #8a6a3a;border-radius:3px;box-shadow:0 6px 16px rgba(0,0,0,.6)}
+[data-th=hunt] #ob{background:rgba(12,8,4,.96)}
+[data-th=hunt] #ov{background:rgba(8,5,2,.88)}
+[data-th=hunt] .ovb{background:linear-gradient(180deg,#34241a,#150e08);border:2px solid #b88a3c;border-radius:4px;box-shadow:inset 0 0 0 3px #150e08,inset 0 0 0 4px rgba(214,170,90,.4),0 0 40px rgba(224,160,60,.35)}
+[data-th=hunt] .ovk{color:#d9b97a}
+[data-th=hunt] .ovt{color:var(--lt);text-shadow:0 2px 0 #5a3a10,0 0 20px rgba(255,190,80,.55)}
+[data-th=hunt] .ovm{color:#fff0c8}
+[data-th=hunt] .fx{color:#fff3c8;text-shadow:0 2px 0 #4a2f0e,0 0 10px var(--ac)}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style></head>
-<body><div id="app"><div id="hd"></div><div id="mn"></div></div><nav class="nv" id="nv"></nav><div id="ts" role="status"></div><div id="ov" data-a="ov" role="dialog" aria-live="assertive"></div><div id="ob" role="dialog" aria-modal="true"></div>
+<body><svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><linearGradient id="gf" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#ff4d1a"/><stop offset=".5" stop-color="#ff9a2e"/><stop offset="1" stop-color="#ffe066"/></linearGradient></defs></svg><div id="app"><div id="hd"></div><div id="mn"></div></div><nav class="nv" id="nv"></nav><div id="ts" role="status"></div><div id="ov" data-a="ov" role="dialog" aria-live="assertive"></div><div id="ob" role="dialog" aria-modal="true"></div>
 <script>
 (function(){'use strict';
 const K='lrpg_v2',$=s=>document.querySelector(s);
 const JOBS={STR:['剣士','⚔️'],AGI:['弓使い','🏹'],INT:['魔法使い','🪄'],VIT:['僧侶','✨']};
 const SN={STR:'筋力',AGI:'俊敏',INT:'知恵',VIT:'活力'};
-const BOSSES=[['暴食の魔王ダルマドン','👹',1800],['糖質竜シュガーワイバーン','🐉',2400],['夜食の魔女','🧙',3000]];
-const TITLES=[['名もなき転生者','N'],['早起きの旅人','N'],['水の守り手','N'],['歩く者','R'],['節制の賢者','R'],['朝焼けの剣士','R'],['継続の魔導士','SR'],['百歩の勇者','SR'],['不屈の探求者','SR'],['世界を歩き切った者','UR']];
+const BOSSES=[['暴食の魔王ダルマドン','d',1800],['糖質竜シュガーワイバーン','w',2400],['夜食の魔女','h',3000]];
+const TITLES=[['名もなき転生者','N'],['早起きの旅人','N'],['水の守り手','N'],['歩く者','R'],['節制の賢者','R'],['朝焼けの剣士','R'],['継続の魔導士','SR'],['百歩の勇者','SR'],['不屈の探求者','SR'],['世界を歩き切った者','UR'],['不屈の継続者','SR'],['百日の約束者','UR']];
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const ymd=(d=new Date())=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
 const wk=()=>{const d=new Date();d.setDate(d.getDate()-((d.getDay()+6)%7));return ymd(d)};
-const need=l=>Math.round(100*Math.pow(l,1.2));
-const RK=[[1,'E'],[5,'D'],[9,'C'],[14,'B'],[21,'A'],[30,'S']];
+const need=l=>Math.round(300+4.9*l);
+const RK=[[1,'E'],[10,'D'],[25,'C'],[45,'B'],[70,'A'],[100,'S']];
 const rk=(l=S.lv)=>RK.filter(x=>l>=x[0]).pop()[1];
 const nr=()=>{const n=RK.find(x=>x[0]>S.lv);return n?' ／ RANK '+n[1]+'までLv.'+n[0]:' ／ 最高ランク到達'};
-const bm=()=>BOSSES[S.boss.i%BOSSES.length][2];
+const bm=()=>Math.round(BOSSES[S.boss.i%BOSSES.length][2]*DF().b);
 function def(){return{name:'冒険者',lv:1,exp:0,pts:50,stats:{STR:1,AGI:1,INT:1,VIT:1},job:null,streak:0,potions:0,titles:[0],title:0,start:null,target:null,weights:[],
 quests:[{id:'q1',t:'体幹トレーニング15分',stat:'STR',exp:50},{id:'q2',t:'ウォーキング20分',stat:'AGI',exp:50},{id:'q3',t:'間食をひとつ見直す',stat:'INT',exp:40},{id:'q4',t:'水2Lと睡眠6時間以上',stat:'VIT',exp:40}],
 meals:{b:null,l:null,d:null},steps:0,stepExp:0,wGot:null,active:false,day:ymd(),
@@ -180,7 +238,7 @@ let ovq=[];
 function pop(k,t,m,s){snd('lv');ovq.push([k,t,m,s||'']);if(!$('#ov').classList.contains('s'))ovn()}
 function ovn(){const e=$('#ov'),x=ovq.shift();if(!x){e.classList.remove('s');return}e.innerHTML='<div class="ovb"><div class="ovk">'+esc(x[0])+'</div><div class="ovt">'+esc(x[1])+'</div><div class="ovm">'+esc(x[2])+'</div><div>'+esc(x[3])+'</div><small style="display:block;margin-top:16px">タップして閉じる</small></div>';e.classList.add('s')}
 let DB=null,UID=null,pm=[],pun=[],lastSync='';
-const RAIDS=[['深淵の暴食邪竜','🐲'],['糖質の巨人','🗿'],['夜更かしの亡霊','👻']];
+const RAIDS=[['深淵の暴食邪竜','w'],['糖質の巨人','G'],['夜更かしの亡霊','P']];
 const raid=()=>{const mx=1200+800*Math.max(1,pm.length),dm=pm.filter(x=>x.wk===wk()).reduce((s,x)=>s+(+x.wx||0),0);return{mx,hp:Math.max(0,mx-dm)}};
 async function pinit(){try{const c=window.claude;if(!c)return;const d=await c.use('db'),u=await c.use('user');if(!d||!u)return;DB=d;UID=await u.id();if(S.party)psub();R(true)}catch(e){}}
 function punsub(){pun.forEach(f=>{try{f()}catch(e){}});pun=[];pm=[]}
@@ -188,21 +246,21 @@ function psub(){punsub();const p='parties/'+S.party;
 pun.push(DB.collection(p+'/members').onSnapshot(s=>{pm=s.docs.map(x=>Object.assign({id:x.id},x.data()));if(tab==='party')R(true)},()=>{}));
 pun.push(DB.collection(p+'/cheers').where('day','==',ymd()).onSnapshot(s=>{let g=0;s.docs.forEach(x=>{const c=x.data();if(c.to===UID&&!(S.seen||[]).includes(x.id)){S.seen=(S.seen||[]).concat(x.id).slice(-80);S.pts+=15;g++;log('エール：'+String(c.fn||'仲間').slice(0,12)+'から応援が届いた')}});if(g){say('📣 仲間からエール！ +'+15*g+'pt');save();R(true)}},()=>{}));
 psync()}
-function psync(){if(!DB||!S.party||!UID)return;const o={n:S.name,lv:S.lv,rk:rk(),j:S.job?JOBS[S.job][1]:'🌱',st:S.streak,wx:S.wx||0,wk:wk(),t:Date.now()},s=JSON.stringify([o.n,o.lv,o.rk,o.j,o.st,o.wx,o.wk]);if(s===lastSync)return;lastSync=s;DB.doc('parties/'+S.party+'/members/'+UID).set(o).catch(()=>{lastSync=''})}
+function psync(){if(!DB||!S.party||!UID)return;const o={n:S.name,lv:S.lv,rk:rk(),j:S.av||(S.job?JOBS[S.job][1]:'🌱'),st:S.streak,wx:S.wx||0,wk:wk(),t:Date.now()},s=JSON.stringify([o.n,o.lv,o.rk,o.j,o.st,o.wx,o.wk]);if(s===lastSync)return;lastSync=s;DB.doc('parties/'+S.party+'/members/'+UID).set(o).catch(()=>{lastSync=''})}
 function arm(k,m){if(armK===k){armK=null;return true}armK=k;say(m||'もう一度タップで確定');R(true);setTimeout(()=>{if(armK===k){armK=null;R(true)}},3000);return false}
-function rollover(){const t=ymd();if(S.wxWk!==wk()){S.wx=0;S.wxWk=wk()}if(!S.all)S.all=S.quests.map(q=>({id:q.id,t:q.t,stat:q.stat,exp:q.exp}));
+function rollover(){const t=ymd();if(S.wxWk!==wk()){S.wx=0;S.wxWk=wk()}if(!S.since)S.since=ymd();if(!S.all)S.all=S.quests.map(q=>({id:q.id,t:q.t,stat:q.stat,exp:q.exp}));
 if(S.day!==t){S.hist=S.hist||{};S.slh=S.slh||{};S.wh=S.wh||{};if(S.sl)S.slh[S.day]=S.sl;if(S.water)S.wh[S.day]=S.water;if(S.active){S.hist[S.day]=pct();S.sh=S.sh||{};S.sh[S.day]=S.steps;const ks=Object.keys(S.hist).sort();while(ks.length>100)delete S.hist[ks.shift()]}const gap=Math.round((Date.parse(t)-Date.parse(S.day))/864e5);
 if((gap>1||!S.active)&&S.streak>0){if(S.potions>0){S.potions--;log('🧪 エリクサーで連続記録を守った')}else{S.streak=0;log('連続記録がリセットされた。今日からまた積み上げよう')}}
 S.quests.forEach(q=>q.got=null);S.meals={b:null,l:null,d:null};S.steps=0;S.stepExp=0;S.wGot=null;S.sent=[];S.water=0;S.wgot=null;S.sl=0;S.sgot=null;S.active=false;S.day=t;syncq()}
 if(S.boss.wk!==wk()){S.boss={i:S.boss.i+(S.boss.claimed?1:0),wk:wk(),claimed:false,hp:0};S.boss.hp=bm()}
 save()}
-function award(o){let e=o.exp||0;if(o.stat&&S.job===o.stat)e=Math.round(e*1.3);
+function award(o){let e=Math.round((o.exp||0)*DF().x*(o.stat&&o.stat!=='STR'?1+sb(o.stat):1));if(o.stat&&S.job===o.stat)e=Math.round(e*1.3);const pp=Math.round((o.pts||0)*DF().p);
 if(!S.active){S.active=true;S.streak++;S.best=Math.max(S.best||0,S.streak)}
-S.pts+=o.pts||0;if(o.stat)S.stats[o.stat]+=o.sg||0;S.exp+=e;S.wx=(S.wx||0)+e;S.boss.hp=Math.max(0,S.boss.hp-e);
-const or0=rk();let up=0;while(S.exp>=need(S.lv)){S.exp-=need(S.lv);S.lv++;S.pts+=30;up++}
+S.pts+=pp;if(o.stat)S.stats[o.stat]+=o.sg||0;S.exp+=e;S.wx=(S.wx||0)+e;const bd=Math.round(e*(1+sb('STR')));S.boss.hp=Math.max(0,S.boss.hp-bd);
+const or0=rk();let up=0;while(S.lv<100&&S.exp>=need(S.lv)){S.exp-=need(S.lv);S.lv++;S.pts+=30;up++}
 if(up){pop('【通知】','LEVEL UP','Lv.'+S.lv,'+'+up*30+'pt を獲得しました');log('レベルアップ：Lv.'+S.lv);if(rk()!==or0){pop('【通知】','RANK UP','RANK '+rk(),'ランクが上がりました');log('ランクアップ：RANK '+rk())}if(S.lv>=5&&!S.job){const top=Object.keys(S.stats).sort((a,b)=>S.stats[b]-S.stats[a])[0];S.job=top;log('天職に覚醒：'+JOBS[top][0]);pop('【通知】','AWAKENING',JOBS[top][1]+' '+JOBS[top][0],'天職に覚醒しました。'+SN[top]+'のクエストのEXPが+30%')}}
-return{exp:e,pts:o.pts||0,stat:o.stat,sg:o.sg||0}}
-function revoke(g){while(S.exp<g.exp&&S.lv>1){S.lv--;S.exp+=need(S.lv);S.pts=Math.max(0,S.pts-30)}S.exp=Math.max(0,S.exp-g.exp);S.wx=Math.max(0,(S.wx||0)-g.exp);S.pts=Math.max(0,S.pts-g.pts);if(g.stat)S.stats[g.stat]=Math.max(1,S.stats[g.stat]-g.sg);if(!S.boss.claimed)S.boss.hp=Math.min(bm(),S.boss.hp+g.exp)}
+return{exp:e,pts:pp,stat:o.stat,sg:o.sg||0,bd}}
+function revoke(g){while(S.exp<g.exp&&S.lv>1){S.lv--;S.exp+=need(S.lv);S.pts=Math.max(0,S.pts-30)}S.exp=Math.max(0,S.exp-g.exp);S.wx=Math.max(0,(S.wx||0)-g.exp);S.pts=Math.max(0,S.pts-g.pts);if(g.stat)S.stats[g.stat]=Math.max(1,S.stats[g.stat]-g.sg);if(!S.boss.claimed)S.boss.hp=Math.min(bm(),S.boss.hp+(g.bd||g.exp))}
 const dayMs=d=>Date.parse(d);
 function ma(d){const a=S.weights.filter(x=>dayMs(x.d)<=dayMs(d)&&dayMs(x.d)>dayMs(d)-7*864e5);return a.length?a.reduce((s,x)=>s+x.w,0)/a.length:null}
 function act(a,k,el){try{act2(a,k,el)}catch(e){say('エラーが起きました。画面を更新します');R(true)}}
@@ -211,15 +269,31 @@ if(a==='ov'){ovn();return}
 if(a==='tab'){tab=k;R();scrollTo(0,0);const m=$('#mn');m.classList.remove('ani');void m.offsetWidth;m.classList.add('ani');setTimeout(()=>m.classList.remove('ani'),500);return}
 if(a==='q'){const q=S.quests.find(x=>x.id===k);if(q.got){revoke(q.got);q.got=null}else{q.got=award({exp:q.exp,pts:10,stat:q.stat,sg:2});log('完了：'+q.t);fx(el,'+'+q.got.exp+' EXP');say('クエスト達成：'+q.t);if(S.quests.every(x=>x.got))pop('【通知】','QUEST CLEAR','ALL CLEAR','本日のデイリークエストをすべて達成しました')}}
 else if(a==='qdel'){if(!arm(a+k,'もう一度タップで削除'))return;const dq=S.quests.find(x=>x.id===k);if(dq&&dq.got)revoke(dq.got);S.quests=S.quests.filter(x=>x.id!==k);S.all=S.all.filter(x=>x.id!==k)}
-else if(a==='qadd'){const t=$('#qt').value.trim();if(!t)return say('クエスト名を入力してください');if(S.all.length>=10)return say('クエストは10個までです');if(!pdy.length)return say('曜日を1つ以上選んでください');S.all.push({id:'q'+Date.now(),t:t.slice(0,30),stat:$('#qs').value,exp:+$('#qe').value,dy:pdy.length===7?null:[...pdy]});pdy=[0,1,2,3,4,5,6];syncq()}
+else if(a==='qadd'){const t=$('#qt').value.trim();if(!t)return say('クエスト名を入力してください');if(!qed&&S.all.length>=10)return say('クエストは10個までです');if(!pdy.length)return say('曜日を1つ以上選んでください');const o={t:t.slice(0,30),stat:$('#qs').value,exp:+$('#qe').value,dy:pdy.length===7?null:[...pdy]},x=qed&&S.all.find(v=>v.id===qed);if(x)Object.assign(x,o);else S.all.push(Object.assign({id:'q'+Date.now()},o));qed=null;pdy=[0,1,2,3,4,5,6];syncq();say(x?'クエストを更新しました':'クエストを追加しました')}
 else if(a==='meal'){if(S.meals[k]){revoke(S.meals[k]);S.meals[k]=null}else{S.meals[k]=award({exp:25,pts:5,stat:'INT',sg:1});fx(el,'+'+S.meals[k].exp+' EXP')}}
 else if(a==='steps'){const v=$('#st').value,n=Math.floor(+v);if(v===''||!(n>=0)||n>100000)return say('歩数を0〜100000で入力してください');
 S.steps=n;S.maxSteps=Math.max(S.maxSteps||0,n);const t=Math.floor(Math.min(n,15000)/250),d=t-S.stepExp;if(d>0){award({exp:d,pts:0,stat:'AGI',sg:Math.floor(t/20)-Math.floor(S.stepExp/20)});S.stepExp=t;log('歩数 '+n.toLocaleString()+' 歩を記録')}}
-else if(a==='w'){const w=parseFloat($('#wi').value);if(!(w>=20&&w<=300))return say('体重を20〜300kgで入力してください');
-const d=ymd(),i=S.weights.findIndex(x=>x.d===d);if(i>=0)S.weights[i].w=w;else S.weights.push({d,w});
-if(S.start==null)S.start=w;if(!S.wGot)S.wGot=award({exp:30,pts:10,stat:'VIT',sg:1});
+else if(a==='w'){const w=parseFloat($('#wi').value),d=$('#wdt').value||ymd();if(!(w>=20&&w<=300))return say('体重を20〜300kgで入力してください');if(!/^\d{4}-\d{2}-\d{2}$/.test(d)||d>ymd()||d<ymd(new Date(Date.now()-400*864e5)))return say('日付は今日までの1年以内で指定してください');
+const i=S.weights.findIndex(x=>x.d===d);if(i>=0)S.weights[i].w=w;else S.weights.push({d,w});wfix();
+if(d!==ymd())say('過去の日付の体重を記録しました');else{if(!S.wGot)S.wGot=award({exp:30,pts:10,stat:'VIT',sg:1});
 const lim=ymd(new Date(Date.now()-7*864e5)),pv=[...S.weights].reverse().find(x=>x.d<=lim);
-if(pv&&(pv.w-w)/pv.w>0.01)say('1週間で1%以上減っています。体調を優先して、急ぎすぎないでください');else say('体重を記録しました')}
+if(pv&&(pv.w-w)/pv.w>0.01)say('1週間で1%以上減っています。体調を優先して、急ぎすぎないでください');else say('体重を記録しました')}}
+else if(a==='qe'){const x=S.all.find(v=>v.id===k);if(!x)return;qed=k;pdy=x.dy?[...x.dy]:[0,1,2,3,4,5,6];R(true);$('#qt').value=x.t;$('#qs').value=x.stat;$('#qe').value=String(x.exp);$('#qt').scrollIntoView({block:'center'});$('#qt').focus();return}
+else if(a==='qec'){qed=null;pdy=[0,1,2,3,4,5,6]}
+else if(a==='pds'){const d=$('#pdd').value,vs=$('#pds').value,vl=$('#pdl').value,vw=$('#pdw').value;if(!/^\d{4}-\d{2}-\d{2}$/.test(d)||d>=ymd()||d<ymd(new Date(Date.now()-60*864e5)))return say('日付は昨日までの60日以内で指定してください');const s=Math.floor(+vs),l=parseFloat(vl),w=Math.floor(+vw);if(vs===''&&vl===''&&vw==='')return say('歩数・睡眠・水分のどれかを入力してください');if(vs!==''&&!(s>=0&&s<=100000))return say('歩数を確認してください');if(vl!==''&&!(l>=0&&l<=16))return say('睡眠時間を0〜16で入力してください');if(vw!==''&&!(w>=0&&w<=16))return say('水分を0〜16杯で入力してください');S.sh=S.sh||{};S.slh=S.slh||{};S.wh=S.wh||{};if(vs!=='')S.sh[d]=s;if(vl!=='')S.slh[d]=l;if(vw!=='')S.wh[d]=w;say('過去の記録を保存しました')}
+else if(a==='pde'){$('#pdd').value=k;$('#pds').value=(S.sh||{})[k]||'';$('#pdl').value=(S.slh||{})[k]||'';$('#pdw').value=(S.wh||{})[k]||'';$('#pdd').scrollIntoView({block:'center'});return}
+else if(a==='obd'){setdf(k);document.querySelectorAll('#ob [data-a="obd"]').forEach(b=>b.classList.toggle('on',b.dataset.k===k));return}
+else if(a==='sd'){setdf(k);say('難易度を「'+DF().n+'」にしました')}
+else if(a==='sf'){if(k!==(S.focus||'')){if(S.focus)S.stats[S.focus]=Math.max(1,S.stats[S.focus]-2);if(k)S.stats[k]+=2;S.focus=k}}
+else if(a==='th'){S.theme=k==='sys'?'sys':'hunt'}
+else if(a==='wrg'){S.wr=+k}
+else if(a==='ex2'){const ti=+$('#ext').value,m=Math.floor(+$('#exm').value);if(!(ti>=0&&ti<EXT.length)||!(m>=1&&m<=300))return say('運動の種類と、1〜300分の時間を入力してください');const t=ymd(),used=(S.ex||[]).filter(x=>x.d===t).reduce((a,x)=>a+(x.b||0),0),b=Math.max(0,Math.min(m,80-used)),g=b>0?award({exp:b,pts:0,stat:EXT[ti][1],sg:Math.floor(b/20)}):null;S.ex=(S.ex||[]).concat({id:'e'+Date.now(),d:t,t:ti,m,b,g}).slice(-80);if(g)fx(el,'+'+g.exp+' EXP');say(g?'運動を記録しました':'今日の運動EXPの上限に達しています（記録のみ保存）')}
+else if(a==='exd'){const i=(S.ex||[]).findIndex(x=>x.id===k);if(i<0)return;if(!arm('exd'+k,'もう一度タップで削除'))return;const x=S.ex[i];if(x.g&&x.d===ymd())revoke(x.g);S.ex.splice(i,1)}
+else if(a==='ts'){ts=k}
+else if(a==='mt'){mt=k}
+else if(a==='we'){const x=S.weights.find(v=>v.d===k);if(!x)return;$('#wdt').value=k;$('#wi').value=x.w;$('#wi').scrollIntoView({block:'center'});$('#wi').focus();return}
+else if(a==='wdl'){if(!arm('wdl'+k,'もう一度タップで削除'))return;S.weights=S.weights.filter(v=>v.d!==k);if(k===ymd()&&S.wGot){revoke(S.wGot);S.wGot=null}wfix()}
+else if(a==='cl'){S.cl=S.cl||{};S.cl[k]=!isc(k)}
 else if(a==='tg'){const t=parseFloat($('#tg').value);if(!(t>=20&&t<=300))return say('目標体重を入力してください');S.target=t;if(S.start==null&&S.weights.length)S.start=S.weights[0].w}
 else if(a==='potion'){if(S.pts<200)return say('金貨が足りません');S.pts-=200;S.potions++;say('🧪 エリクサーを手に入れた')}
 else if(a==='gacha'){if(S.pts<150)return say('金貨が足りません');S.pts-=150;const r=Math.random()*100,ra=r<50?'N':r<80?'R':r<95?'SR':'UR';
@@ -242,29 +316,42 @@ else if(a==='wd'){const n=Math.max(0,Math.min(16,(S.water||0)+(+k)));S.water=n;i
 else if(a==='sl'){const v=$('#sl').value,h=parseFloat(v);if(v===''||!(h>=0&&h<=16))return say('睡眠時間を0〜16で入力してください');S.sl=h;if(h>=6&&!S.sgot){S.sgot=award({exp:30,pts:5,stat:'VIT',sg:1});fx(el,'+'+S.sgot.exp+' EXP')}else if(h<6&&S.sgot){revoke(S.sgot);S.sgot=null}say(h<5?'睡眠が短めです。今夜は早めに休みましょう':'睡眠を記録しました')}
 else if(a==='snd'){S.snd=S.snd===false;if(S.snd)snd('ok')}
 else if(a==='vib'){S.vib=S.vib===false;if(S.vib&&navigator.vibrate)navigator.vibrate(30)}
-else if(a==='rest'){if(S.rest===ymd())return;if((S.rd||[]).filter(d=>d>=wk()).length>=2)return say('休息日は週に2回までです');S.rest=ymd();S.rd=(S.rd||[]).concat(ymd()).slice(-30);if(!S.active){S.active=true;S.streak++;S.best=Math.max(S.best||0,S.streak)}log('休息日を取った');say('🌙 今日は休息日。連続記録は守られました')}
-else if(a==='mc'){msx();if(k==='w'){const w=WM[Math.floor(Date.parse(wk())/6048e5)%3];if(S.wm.c||w[1]()<w[2])return;S.wm.c=true;award({exp:100,pts:150});log('週替わりミッション達成')}else{const i=+String(k).slice(1);if(S.ms.c.includes(k)||!DM[i]||!DM[i][1]())return;S.ms.c.push(k);award({exp:50,pts:20});log('ミッション達成：'+DM[i][0])}S.mc=(S.mc||0)+1;say('🎯 ミッション報酬を受け取りました')}
-else if(a==='fs'){const e=$('#st');if(e){e.scrollIntoView({block:'center'});e.focus()}return}
-else if(a==='gs'){tab='me';R();const e=$('#stg');if(e)e.scrollIntoView();return}
+else if(a==='rest'){if(S.rest===ymd())return;if((S.rd||[]).filter(d=>d>=wk()).length>=DF().r)return say('休息日は週に'+DF().r+'回までです');S.rest=ymd();S.rd=(S.rd||[]).concat(ymd()).slice(-30);if(!S.active){S.active=true;S.streak++;S.best=Math.max(S.best||0,S.streak)}log('休息日を取った');say('🌙 今日は休息日。連続記録は守られました')}
+else if(a==='mc'){msx();if(k==='w'){const w=WMf()[Math.floor(Date.parse(wk())/6048e5)%3];if(S.wm.c||w[1]()<w[2])return;S.wm.c=true;award({exp:100,pts:150});log('週替わりミッション達成')}else{const i=+String(k).slice(1);if(S.ms.c.includes(k)||!DM[i]||!DM[i][1]())return;S.ms.c.push(k);award({exp:50,pts:20});log('ミッション達成：'+DM[i][0])}S.mc=(S.mc||0)+1;say('🎯 ミッション報酬を受け取りました')}
+else if(a==='fs'){ts='log';S.cl=S.cl||{};S.cl.st=false;R(true);const e=$('#st');if(e){e.scrollIntoView({block:'center'});e.focus()}return}
+else if(a==='gs'){tab='me';mt='cf';R();const e=$('#stg');if(e)e.scrollIntoView();return}
 else if(a==='sv'){const tv=$('#sgt').value,t=parseFloat(tv),s=Math.floor(+$('#sgs').value);if(tv!==''&&!(t>=20&&t<=300))return say('目標体重は20〜300kgで入力してください');if(!(s>=1000&&s<=30000))return say('歩数目標は1,000〜30,000で入力してください');const hv=$('#sgh').value,hh=parseFloat(hv);if(hv!==''&&!(hh>=100&&hh<=230))return say('身長は100〇230cmで入力してください'.replace('〇','〜'));if(tv!=='')S.target=t;S.stepGoal=s;if(hv!=='')S.height=hh;const tb=S.height&&S.target?S.target/Math.pow(S.height/100,2):99;say(tb<18.5?'保存しました。目標体重のBMIが18.5を下回ります。無理のない目標か見直してください':S.start&&S.target&&S.target<S.start*.85?'保存しました。目標が大きな減量です。無理のないペースで進めましょう':'設定を保存しました')}
-else if(a==='obgo'){const n=$('#obn').value.trim(),w=parseFloat($('#obw').value),t=parseFloat($('#obt').value),s=Math.floor(+$('#obs').value);if(!n)return say('名前を入力してください');if(!(w>=20&&w<=300))return say('現在の体重を20〜300kgで入力してください');if(!(t>=20&&t<=300))return say('目標体重を20〜300kgで入力してください');if(!(s>=1000&&s<=30000))return say('歩数目標は1,000〜30,000で入力してください');const hv=$('#obh').value,hh=parseFloat(hv);if(hv!==''&&!(hh>=100&&hh<=230))return say('身長は100〜230cmで入力してください');S.name=n.slice(0,12);S.target=t;S.stepGoal=s;if(hv!=='')S.height=hh;const d=ymd(),i=S.weights.findIndex(x=>x.d===d);if(i>=0)S.weights[i].w=w;else S.weights.push({d,w});if(S.start==null)S.start=w;S.ob=true;log('冒険の準備が整った');say('冒険の始まりです！')}
+else if(a==='obnx'){const n=$('#obn').value.trim(),w=parseFloat($('#obw').value),t=parseFloat($('#obt').value),s=Math.floor(+$('#obs').value);if(!n)return say('名前を入力してください');if(!(w>=20&&w<=300))return say('現在の体重を20〜300kgで入力してください');if(!(t>=20&&t<=300))return say('目標体重を20〜300kgで入力してください');if(!(s>=1000&&s<=30000))return say('歩数目標は1,000〜30,000で入力してください');const hv=$('#obh').value,hh=parseFloat(hv);if(hv!==''&&!(hh>=100&&hh<=230))return say('身長は100〜230cmで入力してください');S.name=n.slice(0,12);S.target=t;S.stepGoal=s;if(hv!=='')S.height=hh;const d=ymd(),i=S.weights.findIndex(x=>x.d===d);if(i>=0)S.weights[i].w=w;else S.weights.push({d,w});if(S.start==null)S.start=w;S.ob=false;obp=2;$('#ob').classList.remove('s')}
+else if(a==='obgo'){if(OBF&&S.focus!==OBF){if(S.focus)S.stats[S.focus]=Math.max(1,S.stats[S.focus]-2);S.stats[OBF]+=2;S.focus=OBF}if(OBA)S.av=OBA;S.reason=OBRS;if(OBQ.length)applyQ();S.ob=true;S.ob0=true;obp=0;OBF=null;OBQ=[];OBA='';OBRS='';tab='today';ts='do';log('冒険の準備が整った');pop('【通知】','FIRST QUEST','冒険の始まり','ホームの「次にやること」から、最初のクエストに挑戦しましょう')}
+else if(a==='obbk'){if(obp===3){const r=$('#obr');if(r)OBRS=r.value.trim().slice(0,30)}obp=(obp==='r'||obp<=1)?0:obp-1;$('#ob').classList.remove('s')}
+else if(a==='obst'){obp=1;$('#ob').classList.remove('s')}
+else if(a==='obrs'){obp='r';$('#ob').classList.remove('s')}
+else if(a==='obim'){try{const o=JSON.parse($('#obio').value);if(!o||typeof o.lv!=='number'||!Array.isArray(o.quests))throw 0;S=Object.assign(def(),o);S.ob=true;obp=0;say('データを復元しました')}catch(e){return say('データの形式が正しくありません')}}
+else if(a==='obsg'){const v=+k;$('#obs').value=v;document.querySelectorAll('#ob [data-a="obsg"]').forEach(b=>b.classList.toggle('on',+b.dataset.k===v));return}
+else if(a==='obn2'){obp=3;$('#ob').classList.remove('s')}
+else if(a==='obq'){OBQ=OBQ.includes(k)?OBQ.filter(x=>x!==k):[...OBQ,k];document.querySelectorAll('#ob [data-a="obq"]').forEach(b=>b.classList.toggle('on',OBQ.includes(b.dataset.k)));return}
+else if(a==='oba'){OBA=k;document.querySelectorAll('#ob [data-a="oba"]').forEach(b=>b.classList.toggle('on',b.dataset.k===k));return}
+else if(a==='obn3'){OBRS=($('#obr').value||'').trim().slice(0,30);obp=4;$('#ob').classList.remove('s')}
+else if(a==='sav'){S.av=k}
+else if(a==='srs'){S.reason=($('#srsn').value||'').trim().slice(0,30);say('保存しました')}
+else if(a==='obf'){OBF=k;document.querySelectorAll('#ob [data-a="obf"]').forEach(b=>b.classList.toggle('on',b.dataset.k===k));return}
 else if(a==='obsk'){S.ob=true}
-else if(a==='obr'){S.ob=false;$('#ob').classList.remove('s')}
+else if(a==='obr'){S.ob=false;obp=1;OBF=null;OBQ=[];OBA='';OBRS='';$('#ob').classList.remove('s')}
 else if(a==='nm'){const n=$('#nm').value.trim();if(n)S.name=n.slice(0,12)}
-else if(a==='ex'){const j=JSON.stringify(S);$('#io').value=j;try{navigator.clipboard.writeText(j).then(()=>say('コピーしました'),()=>say('下の欄から手動でコピーしてください'))}catch(e){say('下の欄から手動でコピーしてください')}return}
+else if(a==='ex'){S.lastBk=Date.now();save();const j=JSON.stringify(S);$('#io').value=j;try{navigator.clipboard.writeText(j).then(()=>say('コピーしました'),()=>say('下の欄から手動でコピーしてください'))}catch(e){say('下の欄から手動でコピーしてください')}return}
 else if(a==='im'){try{const o=JSON.parse($('#io').value);if(!o||typeof o.lv!=='number'||!Array.isArray(o.quests))throw 0;S=Object.assign(def(),o);say('読み込みました')}catch(e){return say('データの形式が正しくありません')}}
 else if(a==='rs'){if(!arm('rs','もう一度タップで全データを削除'))return;S=def();say('データを初期化しました')}
-rollover();psync();chk();R(!['qadd','radd','w','steps','tg','nm','im','rs'].includes(a));obr()}
-function hd(){document.documentElement.dataset.rk=rk();const j=S.job?JOBS[S.job]:['駆け出し冒険者','🗡️'],n=need(S.lv);
-$('#hd').innerHTML='<div class="hero"><div class="ht" style="grid-column:1/-1;letter-spacing:.3em;color:var(--lt);text-align:center;border-bottom:1px solid rgba(var(--rgb),.5);padding-bottom:6px;margin-bottom:6px;position:relative">【 ステータス 】<button class="btn sm" data-a="gs" aria-label="設定" style="position:absolute;right:0;top:-8px;letter-spacing:0">⚙</button></div><div class="lv"><small>Lv.</small>'+S.lv+'</div><div><div class="hn">'+j[1]+' '+esc(S.name)+'（'+j[0]+'）<span class="rk r'+rk()+'">RANK '+rk()+'</span></div><div class="ht">『'+esc(TITLES[S.title][0])+'』</div></div><div class="bar"><i style="width:'+Math.min(100,S.exp/n*100)+'%"></i></div><div class="ht" style="grid-column:1/-1">次のレベルまで '+(n-S.exp)+' EXP'+nr()+'</div><div class="chips"><span>🪙 '+S.pts+'</span><span>🔥 '+S.streak+'日</span><span>🧪 '+S.potions+'</span></div></div>'}
+rollover();psync();chk();save();R(!['qadd','qec','pds','ex2','radd','w','steps','tg','nm','im','rs'].includes(a));obr()}
+function hd(){document.documentElement.dataset.rk=rk();document.documentElement.dataset.th=S.theme||'hunt';const j=S.job?JOBS[S.job]:['駆け出し冒険者','🗡️'],n=need(S.lv);
+$('#hd').innerHTML='<div class="hero"><div class="lv"><small>Lv.</small>'+S.lv+'</div><div><div class="hn">'+(S.av||j[1])+' '+esc(S.name)+'（'+j[0]+'）<span class="rk r'+rk()+'">RANK '+rk()+'</span></div><div class="ht">『'+esc(TITLES[S.title][0])+'』</div></div><button class="btn sm" data-a="gs" aria-label="設定">⚙</button><div class="bar"><i style="width:'+Math.min(100,S.exp/n*100)+'%"></i></div><div class="rw sp" style="grid-column:1/-1;gap:8px;flex-wrap:wrap"><div class="ht">'+(S.lv>=100?'MAX LEVEL':'次のレベルまで '+(n-S.exp)+' EXP')+'<br>'+nr().replace(' ／ ','')+'</div><div class="chips" style="margin:0"><span>🪙 '+S.pts+'</span><span>'+fl(16,S.streak>=30?' blue':S.streak>=7?' hot':'')+S.streak+'日</span><span>🧪 '+S.potions+'</span></div></div></div>'}
 function today(){const b=BOSSES[S.boss.i%BOSSES.length],m=bm(),done=S.quests.filter(q=>q.got).length;
-let h=home()+mis()+'<div class="cd"><div><h3>'+b[1]+' ダンジョンボス：'+b[0]+'</h3></div><div class="bar or" style="margin:8px 0 4px"><i style="width:'+S.boss.hp/m*100+'%"></i></div><div class="rw sp"><small>HP '+S.boss.hp+' / '+m+'（獲得EXPがダメージ）</small>'+(S.boss.hp===0&&!S.boss.claimed?'<button class="btn pri sm" data-a="claim">報酬を受け取る</button>':S.boss.claimed?'<small>討伐済み。来週に新ボス登場</small>':'')+'</div></div>';
-h+='<div class="cd"><h3>デイリークエスト（'+done+'/'+S.quests.length+'）</h3>'+(S.quests.length?S.quests.map(q=>'<div class="rw q '+(q.got?'dn':'')+'"><button class="ck" data-a="q" data-k="'+q.id+'" aria-label="完了を切り替え">'+(q.got?'✓':'')+'</button><div class="g1"><div class="t">'+esc(q.t)+'</div><small>+'+q.exp+' EXP・'+SN[q.stat]+(q.dy?'・'+dtx(q.dy):'')+'</small></div><button class="btn sm'+(armK==='qdel'+q.id?' dg':'')+'" data-a="qdel" data-k="'+q.id+'" aria-label="削除">'+(armK==='qdel'+q.id?'削除？':'✕')+'</button></div>').join(''):'<p class="mu">クエストがありません。下のフォームから追加しましょう。</p>')+
-'<div class="gr" style="margin-top:10px"><input class="in" id="qt" maxlength="30" placeholder="新しいクエスト名"><div class="gr g2"><select class="in" id="qs">'+Object.keys(SN).map(k=>'<option value="'+k+'">'+SN[k]+'</option>').join('')+'</select><select class="in" id="qe"><option value="40">+40 EXP</option><option value="50" selected>+50 EXP</option><option value="70">+70 EXP</option></select></div>'+hq()+dayc()+tpc()+'<button class="btn" data-a="qadd">クエストを追加</button></div></div>';
-h+='<div class="cd"><h3>食事ミッション（各 +25 EXP）</h3><div class="gr g3">'+[['b','朝'],['l','昼'],['d','夜']].map(x=>'<button class="btn '+(S.meals[x[0]]?'on':'')+'" data-a="meal" data-k="'+x[0]+'">'+x[1]+(S.meals[x[0]]?' ✓':'')+'</button>').join('')+'</div><p class="mu" style="margin:8px 0 0">主食・タンパク質・野菜をそろえられた食事にチェックします。</p></div>';
-h+=slw();
-h+='<div class="cd"><h3>歩数トレーニング</h3><div class="gr g2"><input class="in" id="st" type="number" min="0" inputmode="numeric" placeholder="例：8000" value="'+(S.steps||'')+'"><button class="btn pri" data-a="steps">記録する</button></div><div class="bar" style="margin-top:10px"><i style="width:'+Math.min(100,S.steps/sg()*100)+'%"></i></div><small>目標 '+sg().toLocaleString()+'歩（15,000歩までEXP。入力は上書きされます）</small></div>';return h}
-function chart(){const a=S.weights.slice(-30);if(a.length<2)return'<p class="mu">2回以上記録するとグラフが表示されます。</p>';
+let h=seg('ts',[['do','やること'],['log','きろく'],['ms','ミッション']],ts)+(ts==='do'?bkc()+home():ts==='ms'?mis():'')+(ts!=='ms'?'':'<div class="cd'+cl('boss')+'"><div><h3 '+ha('boss','HP '+Math.round(S.boss.hp/m*100)+'%')+'>狩猟対象：'+b[0]+'</h3></div>'+ba(b[1],'#d9482e',S.boss.hp===0)+'<div class="bar or" style="margin:8px 0 4px"><i style="width:'+S.boss.hp/m*100+'%"></i></div><div class="rw sp"><small>HP '+S.boss.hp+' / '+m+'（獲得EXPがダメージ）</small>'+(S.boss.hp===0&&!S.boss.claimed?'<button class="btn pri sm" data-a="claim">報酬を受け取る</button>':S.boss.claimed?'<small>討伐済み。来週に新ボス登場</small>':'')+'</div></div>');
+h+=ts!=='do'?'':'<div class="cd'+cl('q')+'"><h3 '+ha('q',done+'/'+S.quests.length)+'>受注中のクエスト（'+done+'/'+S.quests.length+'）</h3>'+(S.quests.length?S.quests.map(q=>'<div class="rw q '+(q.got?'dn':'')+'"><button class="ck" data-a="q" data-k="'+q.id+'" aria-label="完了を切り替え">'+(q.got?'✓':'')+'</button><div class="g1"><div class="t">'+esc(q.t)+'</div><small>+'+q.exp+' EXP・'+SN[q.stat]+(q.dy?'・'+dtx(q.dy):'')+'</small></div><button class="btn sm" data-a="qe" data-k="'+q.id+'" aria-label="編集">✎</button><button class="btn sm'+(armK==='qdel'+q.id?' dg':'')+'" data-a="qdel" data-k="'+q.id+'" aria-label="削除">'+(armK==='qdel'+q.id?'削除？':'✕')+'</button></div>').join(''):'<p class="mu">クエストがありません。下のフォームから追加しましょう。</p>')+
+'<div class="gr" style="margin-top:10px"><input class="in" id="qt" maxlength="30" placeholder="新しいクエスト名"><div class="gr g2"><select class="in" id="qs">'+Object.keys(SN).map(k=>'<option value="'+k+'">'+SN[k]+'</option>').join('')+'</select><select class="in" id="qe"><option value="40">+40 EXP</option><option value="50" selected>+50 EXP</option><option value="60">+60 EXP</option><option value="70">+70 EXP</option></select></div>'+hq()+dayc()+tpc()+'<button class="btn'+(qed?' pri':'')+'" data-a="qadd">'+(qed?'変更を保存':'クエストを追加')+'</button>'+(qed?'<button class="btn" data-a="qec">編集をやめる</button>':'')+'</div></div>';
+h+=ts!=='do'?'':'<div class="cd'+cl('ml')+'"><h3 '+ha('ml',['b','l','d'].filter(k=>S.meals[k]).length+'/3')+'>食事ミッション（各 +25 EXP）</h3><div class="gr g3">'+[['b','朝'],['l','昼'],['d','夜']].map(x=>'<button class="btn '+(S.meals[x[0]]?'on':'')+'" data-a="meal" data-k="'+x[0]+'">'+x[1]+(S.meals[x[0]]?' ✓':'')+'</button>').join('')+'</div><p class="mu" style="margin:8px 0 0">主食・タンパク質・野菜をそろえられた食事にチェックします。</p></div>';
+h+=ts==='log'?exc()+slw():'';
+h+=ts!=='log'?'':'<div class="cd'+cl('st')+'"><h3 '+ha('st',(S.steps||0).toLocaleString()+'歩')+'>歩数トレーニング</h3><div class="gr g2"><input class="in" id="st" type="number" min="0" inputmode="numeric" placeholder="例：8000" value="'+(S.steps||'')+'"><button class="btn pri" data-a="steps">記録する</button></div><div class="bar" style="margin-top:10px"><i style="width:'+Math.min(100,S.steps/sg()*100)+'%"></i></div><small>目標 '+sg().toLocaleString()+'歩（15,000歩までEXP。入力は上書きされます）</small></div>';h+=ts==='log'?pdc():'';return h}
+function chart(){const a=wsel();if(a.length<2)return'<p class="mu">2回以上記録するとグラフが表示されます。</p>';
 const vs=a.map(x=>x.w);if(S.target)vs.push(S.target);const lo=Math.min(...vs)-.5,hi=Math.max(...vs)+.5,X=i=>16+i*288/(a.length-1),Y=v=>10+(hi-v)/(hi-lo)*108;
 const pr=a.map((x,i)=>X(i).toFixed(1)+','+Y(x.w).toFixed(1)).join(' '),pm=a.map((x,i)=>X(i).toFixed(1)+','+Y(ma(x.d)).toFixed(1)).join(' ');
 return'<svg viewBox="0 0 320 130" width="100%" role="img" aria-label="体重の推移">'+(S.target?'<line x1="16" x2="304" y1="'+Y(S.target)+'" y2="'+Y(S.target)+'" stroke="var(--or)" stroke-dasharray="4 4"/><text x="18" y="'+(Y(S.target)-4)+'" font-size="10" fill="var(--or)">目標 '+S.target+'</text>':'')+'<polyline points="'+pr+'" fill="none" stroke="var(--mu)" stroke-width="1.5" opacity=".5"/><polyline points="'+pm+'" fill="none" stroke="var(--ac)" stroke-width="3" stroke-linejoin="round"/></svg><small>濃い線は7日平均、薄い線は毎日の記録です。</small>'}
@@ -273,72 +360,125 @@ if(l){const old=[...S.weights].reverse().find(x=>dayMs(x.d)<=dayMs(l.d)-7*864e5)
 const pg=S.target&&S.start!=null&&l?Math.max(0,Math.min(100,(S.start-l.w)/(S.start-S.target)*100)):0;
 let h=warn()+'<div class="cd"><h3>身体データ</h3><div class="gr g3"><div class="bx"><small>最新</small><div class="big">'+(l?l.w.toFixed(1):'--')+'</div></div><div class="bx"><small>7日平均</small><div class="big">'+(avg?avg.toFixed(1):'--')+'</div></div><div class="bx"><small>目標</small><div class="big">'+(S.target||'--')+'</div></div></div>'+
 (S.target&&l?'<div class="bar" style="margin-top:10px"><i style="width:'+pg+'%"></i></div><small>目標まであと '+Math.max(0,l.w-S.target).toFixed(1)+'kg（'+pg.toFixed(0)+'%）</small>':'')+
-'<p style="margin:10px 0">'+tr+'</p><div class="gr g2"><input class="in" id="wi" type="number" step="0.1" inputmode="decimal" placeholder="今日の体重 kg"><button class="btn pri" data-a="w">記録する</button></div><small>1日の最初の記録で +30 EXP。</small></div>';
-h+='<div class="cd"><h3>推移</h3>'+chart()+'</div><div class="cd"><h3>目標体重</h3><div class="gr g2"><input class="in" id="tg" type="number" step="0.1" inputmode="decimal" placeholder="例：58.0" value="'+(S.target||'')+'"><button class="btn" data-a="tg">設定する</button></div><small>目安は1週間に体重の0.5〜1%以内。急ぎすぎないペースがリバウンドを防ぎます。</small></div>';
-h+='<div class="cd"><h3>記録の履歴</h3>'+(S.weights.length?[...S.weights].reverse().slice(0,14).map(x=>'<div class="rw sp q"><span>'+x.d.slice(5).replace('-','/')+'</span><b>'+x.w.toFixed(1)+' kg</b></div>').join(''):'<p class="mu">まだ記録がありません。最初の体重を記録して冒険を始めましょう。</p>')+'</div>';return h}
+'<p style="margin:10px 0">'+tr+'</p><div class="gr g2" style="grid-template-columns:1fr"><input class="in" id="wdt" type="date" max="'+ymd()+'" value="'+ymd()+'"></div><div class="gr g2" style="margin-top:8px"><input class="in" id="wi" type="number" step="0.1" inputmode="decimal" placeholder="体重 kg"><button class="btn pri" data-a="w">記録する</button></div><small>今日の最初の記録で +30 EXP。過去の日付はEXPなし。履歴の「編集」で修正できます。</small></div>';
+h+='<div class="cd"><h3>推移</h3>'+rgc()+chart()+'</div><div class="cd"><h3>目標体重</h3><div class="gr g2"><input class="in" id="tg" type="number" step="0.1" inputmode="decimal" placeholder="例：58.0" value="'+(S.target||'')+'"><button class="btn" data-a="tg">設定する</button></div><small>目安は1週間に体重の0.5〜1%以内。急ぎすぎないペースがリバウンドを防ぎます。</small></div>';
+h+='<div class="cd'+cl('wh')+'"><h3 '+ha('wh',S.weights.length+'件')+'>記録の履歴（'+S.weights.length+'件）</h3>'+(S.weights.length?[...S.weights].reverse().slice(0,30).map(x=>'<div class="rw q"><span style="width:52px">'+x.d.slice(5).replace('-','/')+'</span><b class="g1">'+x.w.toFixed(1)+' kg</b><button class="btn sm" data-a="we" data-k="'+x.d+'">編集</button><button class="btn sm'+(armK==='wdl'+x.d?' dg':'')+'" data-a="wdl" data-k="'+x.d+'" aria-label="削除">'+(armK==='wdl'+x.d?'削除？':'✕')+'</button></div>').join(''):'<p class="mu">まだ記録がありません。最初の体重を記録して冒険を始めましょう。</p>')+'</div>';return h}
 function shop(){let h='<div class="cd"><h3>🪙 '+S.pts+' pt</h3><div class="gr"><button class="btn" data-a="potion">🧪 エリクサーを作る（200pt）<br><small>サボった日の連続記録を1回守る。所持 '+S.potions+'</small></button><button class="btn" data-a="gacha">🔮 称号を召喚（150pt）<br><small>N50% / R30% / SR15% / UR5%。重複は50pt返金</small></button></div></div>';
 h+='<div class="cd"><h3>称号（'+S.titles.length+'/'+TITLES.length+'）</h3><div class="gr">'+S.titles.map(i=>'<button class="btn '+(S.title===i?'on':'')+'" data-a="equip" data-k="'+i+'">['+TITLES[i][1]+'] '+esc(TITLES[i][0])+(S.title===i?'（装備中）':'')+'</button>').join('')+'</div></div>';
 h+='<div class="cd"><h3>現実のごほうび</h3>'+S.rewards.map(r=>'<div class="rw q"><div class="g1">'+esc(r.t)+'<br><small>'+r.c+' pt</small></div><button class="btn pri sm" data-a="rd" data-k="'+r.id+'">解禁</button><button class="btn sm'+(armK==='rdel'+r.id?' dg':'')+'" data-a="rdel" data-k="'+r.id+'" aria-label="削除">'+(armK==='rdel'+r.id?'削除？':'✕')+'</button></div>').join('')+'<div class="gr g2" style="margin-top:10px"><input class="in" id="rt" maxlength="30" placeholder="ごほうびの内容"><input class="in" id="rc" type="number" step="50" min="50" value="300" style="width:90px"></div><button class="btn" style="margin-top:8px;width:100%" data-a="radd">ごほうびを追加</button></div>';return h}
 function me(){const mx=Math.max(...Object.values(S.stats));
-let h=wr()+cal()+bdg()+'<div class="cd"><h3>能力値</h3>'+Object.keys(SN).map(k=>'<div class="rw sp"><span style="width:56px">'+SN[k]+'</span><div class="g1 bar"><i style="width:'+S.stats[k]/mx*100+'%"></i></div><b style="width:28px;text-align:right">'+S.stats[k]+'</b></div>').join('')+'<p class="mu" style="margin-bottom:0">'+(S.job?'天職『'+JOBS[S.job][0]+'』：'+SN[S.job]+'のクエストのEXPが+30%。':'Lv.5になると、最も伸ばした能力の天職に覚醒します。覚醒後は、その能力のクエストのEXPが+30%。')+'</p></div>';
-h+='<div class="cd"><h3>ランク</h3><div class="gr g3">'+RK.map(x=>'<div class="bx" style="'+(rk()===x[1]?'border-color:var(--ac);box-shadow:0 0 10px var(--ac)':'')+'"><b class="rk r'+x[1]+'" style="margin:0">'+x[1]+'</b><br><small>Lv.'+x[0]+'〜</small></div>').join('')+'</div><p class="mu" style="margin-bottom:0">レベルが上がるとランクが昇格します。</p></div>';
-h+='<div class="cd"><h3>システムログ</h3>'+S.log.map(t=>'<div class="lg">'+esc(t)+'</div>').join('')+'</div>';
-h+='<div class="cd" id="stg"><h3>目標設定</h3><div class="gr"><label><small>目標体重（kg）</small><input class="in" id="sgt" type="number" step="0.1" inputmode="decimal" value="'+(S.target||'')+'"></label><label><small>1日の歩数目標</small><input class="in" id="sgs" type="number" step="500" inputmode="numeric" value="'+sg()+'"></label><label><small>身長（cm）</small><input class="in" id="sgh" type="number" step="0.1" inputmode="decimal" value="'+(S.height||'')+'"></label><button class="btn pri" data-a="sv">保存する</button><button class="btn" data-a="obr">はじめのガイドをもう一度見る</button></div></div>';
-h+='<div class="cd"><h3>サウンド</h3><div class="gr" style="grid-template-columns:1fr 1fr"><button class="btn'+(S.snd!==false?' on':'')+'" data-a="snd">効果音：'+(S.snd!==false?'オン':'オフ')+'</button><button class="btn'+(S.vib!==false?' on':'')+'" data-a="vib">バイブ：'+(S.vib!==false?'オン':'オフ')+'</button></div><small>iPhoneではバイブは動作しません。</small></div>';
-h+='<div class="cd"><h3>名前・データ</h3><div class="gr g2"><input class="in" id="nm" maxlength="12" value="'+esc(S.name)+'"><button class="btn" data-a="nm">名前を変更</button></div><p class="mu">データはこの端末のブラウザに保存されます。バックアップは書き出して保管してください。</p><textarea class="in" id="io" placeholder="書き出したデータをここに貼り付けて読み込み"></textarea><div class="gr g2" style="margin-top:8px"><button class="btn" data-a="ex">書き出す（コピー）</button><button class="btn" data-a="im">読み込む</button></div><button class="btn'+(armK==='rs'?' dg':'')+'" style="margin-top:12px;width:100%;color:var(--rd)" data-a="rs">'+(armK==='rs'?'もう一度タップで全データを削除':'全データを初期化')+'</button></div>';return h}
+let h=seg('mt',[['rp','レポート'],['ac','成長'],['cf','設定']],mt)+(mt==='rp'?wr()+cal():'');
+h+=mt!=='ac'?'':bdg()+'<div class="cd"><h3>能力値</h3>'+Object.keys(SN).map(k=>'<div class="rw sp"><span style="width:56px">'+SN[k]+'</span><div class="g1 bar"><i style="width:'+S.stats[k]/mx*100+'%"></i></div><b style="width:28px;text-align:right">'+S.stats[k]+'</b></div>').join('')+sbt()+'<p class="mu" style="margin-bottom:0">'+(S.job?'天職『'+JOBS[S.job][0]+'』：'+SN[S.job]+'のクエストのEXPが+30%。':'Lv.5になると、最も伸ばした能力の天職に覚醒します。覚醒後は、その能力のクエストのEXPが+30%。')+'</p></div>';
+h+=mt!=='ac'?'':'<div class="cd"><h3>ランク</h3><div class="gr g3">'+RK.map(x=>'<div class="bx" style="'+(rk()===x[1]?'border-color:var(--ac);box-shadow:0 0 10px var(--ac)':'')+'"><b class="rk r'+x[1]+'" style="margin:0">'+x[1]+'</b><br><small>Lv.'+x[0]+'〜</small></div>').join('')+'</div><p class="mu" style="margin-bottom:0">レベルが上がるとランクが昇格します。</p></div>';
+h+=mt!=='ac'?'':'<div class="cd"><h3>システムログ</h3>'+S.log.map(t=>'<div class="lg">'+esc(t)+'</div>').join('')+'</div>';
+h+=mt!=='cf'?'':'<div class="cd"><h3>冒険のスタイル</h3><small>難易度</small><div class="gr" style="gap:6px;margin:2px 0 12px">'+dfb('sd')+'</div><small>伸ばしたい能力</small><div class="fw" style="margin:4px 0">'+ffb()+'</div><small style="display:block;margin-top:6px">変更はすぐ反映されます。獲得済みのEXPやポイントは変わりません。伸ばしたい能力は+2から始まります。レイドボスは全員共通です。</small></div>';
+h+=mt!=='cf'?'':'<div class="cd"><h3>テーマ</h3><div class="gr" style="grid-template-columns:1fr 1fr"><button class="btn'+((S.theme||'hunt')==='hunt'?' on':'')+'" data-a="th" data-k="hunt">狩猟ギルド風</button><button class="btn'+(S.theme==='sys'?' on':'')+'" data-a="th" data-k="sys">システム風</button></div><small style="display:block;margin-top:6px">ランクが上がると、画面の光り方や色味が変わります。</small></div>';
+h+=mt!=='cf'?'':'<div class="cd"><h3>プロフィール</h3><small>アイコン</small><div class="fw" style="margin:4px 0 10px">'+AVS.map(v=>'<button class="btn sm'+((S.av||'')===v?' on':'')+'" data-a="sav" data-k="'+v+'">'+v+'</button>').join('')+'</div><small>目標の理由（ホームに表示）</small><div class="gr g2"><input class="in" id="srsn" maxlength="30" value="'+esc(S.reason||'')+'"><button class="btn" data-a="srs">保存</button></div></div>';
+h+=mt!=='cf'?'':'<div class="cd" id="stg"><h3>目標設定</h3><div class="gr"><label><small>目標体重（kg）</small><input class="in" id="sgt" type="number" step="0.1" inputmode="decimal" value="'+(S.target||'')+'"></label><label><small>1日の歩数目標</small><input class="in" id="sgs" type="number" step="500" inputmode="numeric" value="'+sg()+'"></label><label><small>身長（cm）</small><input class="in" id="sgh" type="number" step="0.1" inputmode="decimal" value="'+(S.height||'')+'"></label><button class="btn pri" data-a="sv">保存する</button><button class="btn" data-a="obr">はじめのガイドをもう一度見る</button></div></div>';
+h+=mt!=='cf'?'':'<div class="cd"><h3>サウンド</h3><div class="gr" style="grid-template-columns:1fr 1fr"><button class="btn'+(S.snd!==false?' on':'')+'" data-a="snd">効果音：'+(S.snd!==false?'オン':'オフ')+'</button><button class="btn'+(S.vib!==false?' on':'')+'" data-a="vib">バイブ：'+(S.vib!==false?'オン':'オフ')+'</button></div><small>iPhoneではバイブは動作しません。</small></div>';
+h+=mt!=='cf'?'':'<div class="cd"><h3>名前・データ</h3><div class="gr g2"><input class="in" id="nm" maxlength="12" value="'+esc(S.name)+'"><button class="btn" data-a="nm">名前を変更</button></div><p class="mu">データはこの端末のブラウザに保存されます。バックアップは書き出して保管してください。</p><textarea class="in" id="io" placeholder="書き出したデータをここに貼り付けて読み込み"></textarea><div class="gr g2" style="margin-top:8px"><button class="btn" data-a="ex">書き出す（コピー）</button><button class="btn" data-a="im">読み込む</button></div><button class="btn'+(armK==='rs'?' dg':'')+'" style="margin-top:12px;width:100%;color:var(--rd)" data-a="rs">'+(armK==='rs'?'もう一度タップで全データを削除':'全データを初期化')+'</button></div>';return h}
 const sg=()=>S.stepGoal||8000;
 function home(){const qs=S.quests,qd=qs.filter(q=>q.got).length,md=['b','l','d'].filter(k=>S.meals[k]).length,sd=S.steps>=sg()?1:0,wd=S.weights.some(x=>x.d===ymd())?1:0,tot=qs.length+5,dn=qd+md+sd+wd,p=Math.min(1,dn/tot),hr=new Date().getHours(),g=hr<5?'こんばんは':hr<11?'おはよう':hr<18?'こんにちは':'こんばんは';
 let nx=null;if(!wd)nx=['体重を記録しよう（+30 EXP）','tab','body','記録へ'];else{const q=qs.find(x=>!x.got);if(q)nx=['クエスト：'+q.t+'（+'+q.exp+' EXP）','q',q.id,'完了にする'];else{const mk=[['b','朝'],['l','昼'],['d','夜']].find(x=>!S.meals[x[0]]);if(mk)nx=[mk[1]+'ごはんを整えよう（+25 EXP）','meal',mk[0],'整えた'];else if(!sd)nx=['歩数を記録しよう（目標 '+sg().toLocaleString()+'歩）','fs','','入力する']}}
-return'<div class="cd"><div class="rw" style="gap:16px"><svg width="92" height="92" viewBox="0 0 92 92" role="img" aria-label="今日の達成率"><circle cx="46" cy="46" r="38" fill="none" style="stroke:rgba(var(--rgb),.2)" stroke-width="8"/><circle cx="46" cy="46" r="38" fill="none" stroke="var(--ac)" stroke-width="8" stroke-dasharray="'+(p*238.8).toFixed(1)+' 238.8" transform="rotate(-90 46 46)" style="filter:drop-shadow(0 0 4px var(--ac))"/><text x="46" y="53" text-anchor="middle" font-size="22" font-weight="700" fill="var(--ink)" font-family="Rajdhani,sans-serif">'+Math.round(p*100)+'%</text></svg><div class="g1"><div style="font-weight:700">'+g+'、'+esc(S.name)+'</div><small>今日の達成 '+dn+' / '+tot+'（クエスト・食事・歩数・体重）</small><div style="margin-top:6px">'+rb()+'</div></div></div>'+(nx?'<div class="rw" style="margin-top:12px;padding-top:12px;border-top:1px solid var(--ln)"><div class="g1"><small>次にやること</small><div>'+esc(nx[0])+'</div></div><button class="btn pri sm" data-a="'+nx[1]+'" data-k="'+nx[2]+'">'+nx[3]+'</button></div>':'<p class="warn" style="margin:12px 0 0">今日のミッションはすべて達成！おつかれさまでした。</p>')+'</div>'}
-function obr(){const e=$('#ob');if(S.ob===undefined&&(S.weights.length||S.lv>1||S.exp))S.ob=true;if(S.ob){e.classList.remove('s');return}if(e.classList.contains('s'))return;const lw=S.weights.length?S.weights[S.weights.length-1].w:'';
-e.innerHTML='<div class="ovb" style="margin:auto;text-align:left"><div class="ovk" style="text-align:center">【通知】</div><div class="ovt" style="font-size:26px;text-align:center">ようこそ、冒険者</div><p class="mu">毎日のクエストをこなして経験値を貯め、レベルとランクを上げていきましょう。最初に、あなたのことを教えてください。</p><div class="gr"><label><small>名前</small><input class="in" id="obn" maxlength="12" value="'+esc(S.name)+'"></label><label><small>現在の体重（kg）</small><input class="in" id="obw" type="number" step="0.1" inputmode="decimal" value="'+lw+'"></label><label><small>目標体重（kg）</small><input class="in" id="obt" type="number" step="0.1" inputmode="decimal" value="'+(S.target||'')+'"></label><label><small>1日の歩数目標</small><input class="in" id="obs" type="number" step="500" inputmode="numeric" value="'+sg()+'"></label><label><small>身長（cm・任意）</small><input class="in" id="obh" type="number" step="0.1" inputmode="decimal" value="'+(S.height||'')+'"></label><button class="btn pri" data-a="obgo">冒険を始める</button><button class="btn" data-a="obsk">あとで設定する</button></div><p class="mu" style="margin:10px 0 0">無理のないペース（1週間で体重の0.5〜1%以内）がおすすめです。</p></div>';e.classList.add('s')}
+return'<div class="cd"><div class="rw" style="gap:16px"><svg width="92" height="92" viewBox="0 0 92 92" role="img" aria-label="今日の達成率"><circle cx="46" cy="46" r="38" fill="none" style="stroke:rgba(var(--rgb),.2)" stroke-width="8"/><circle cx="46" cy="46" r="38" fill="none" stroke="var(--ac)" stroke-width="8" stroke-dasharray="'+(p*238.8).toFixed(1)+' 238.8" transform="rotate(-90 46 46)" style="filter:drop-shadow(0 0 4px var(--ac))"/><text x="46" y="53" text-anchor="middle" font-size="22" font-weight="700" fill="var(--ink)" font-family="Rajdhani,sans-serif">'+Math.round(p*100)+'%</text></svg><div class="g1"><div style="font-weight:700">'+g+'、'+esc(S.name)+'</div>'+(S.reason?'<div class="ht">🎯 '+esc(S.reason)+'</div>':'')+'<small>今日の達成 '+dn+' / '+tot+'（クエスト・食事・歩数・体重）</small><div style="margin-top:6px">'+rb()+'</div></div></div>'+(nx?'<div class="rw" style="margin-top:12px;padding-top:12px;border-top:1px solid var(--ln)"><div class="g1"><small>次にやること</small><div>'+esc(nx[0])+'</div></div><button class="btn pri sm" data-a="'+nx[1]+'" data-k="'+nx[2]+'">'+nx[3]+'</button></div>':'<p class="warn" style="margin:12px 0 0">今日のミッションはすべて達成！おつかれさまでした。</p>')+'</div>'}
+
 function score(d=S.day){const dn=S.quests.filter(q=>q.got).length+['b','l','d'].filter(k=>S.meals[k]).length+(S.steps>=sg()?1:0)+(S.weights.some(x=>x.d===d)?1:0);return{dn,tot:S.quests.length+5}}
 function pct(){const s=score();return Math.min(100,Math.round(s.dn/s.tot*100))}
-const BD=[['w1','📏','最初の記録','体重を初めて記録する',()=>S.weights.length>=1],['w10','📈','記録の習慣','体重を10回記録する',()=>S.weights.length>=10],['s3','🔥','3日連続','3日連続で活動する',()=>(S.best||0)>=3],['s7','🔥','7日連続','7日連続で活動する',()=>(S.best||0)>=7],['s30','🌋','30日連続','30日連続で活動する',()=>(S.best||0)>=30],['pf','💯','パーフェクトデイ','1日の達成率100%',()=>(S.active&&pct()>=100)||Object.values(S.hist||{}).includes(100)],['st','👣','1万歩','1日に10,000歩以上',()=>(S.maxSteps||0)>=10000],['jb','✨','天職覚醒','天職に覚醒する',()=>!!S.job],['rc','🛡️','ランクC','Lv.9に到達',()=>S.lv>=9],['rb','🏅','ランクB','Lv.14に到達',()=>S.lv>=14],['bs','🐉','ボスハンター','週間ボスを討伐する',()=>(S.bw||0)>=1],['ms','🎯','ミッション達成者','ミッションを5回達成',()=>(S.mc||0)>=5],['pt','👥','仲間と共に','パーティーに参加する',()=>!!S.party]];
-function chk(){S.bd=S.bd||{};BD.forEach(b=>{if(!S.bd[b[0]]&&b[4]()){S.bd[b[0]]=ymd();S.pts+=20;log('実績解除：'+b[2]);pop('【通知】','ACHIEVEMENT',b[1]+' '+b[2],b[3]+'（+20pt）')}})}
+const BD=[['w1','📏','最初の記録','体重を初めて記録する',()=>S.weights.length>=1],['w10','📈','記録の習慣','体重を10回記録する',()=>S.weights.length>=10],['s3',fl(22),'3日連続','3日連続で活動する',()=>(S.best||0)>=3],['s7',fl(22,' hot'),'7日連続','7日連続で活動する',()=>(S.best||0)>=7],['s30',fl(22,' blue'),'30日連続','30日連続で活動する',()=>(S.best||0)>=30],['pf','💯','パーフェクトデイ','1日の達成率100%',()=>(S.active&&pct()>=100)||Object.values(S.hist||{}).includes(100)],['st','👣','1万歩','1日に10,000歩以上',()=>(S.maxSteps||0)>=10000],['jb','✨','天職覚醒','天職に覚醒する',()=>!!S.job],['rc','🛡️','ランクC','Lv.25に到達',()=>S.lv>=25],['rb','🏅','ランクB','Lv.45に到達',()=>S.lv>=45],['bs','🐉','ボスハンター','週間ボスを討伐する',()=>(S.bw||0)>=1],['ms','🎯','ミッション達成者','ミッションを5回達成',()=>(S.mc||0)>=5],['pt','👥','仲間と共に','パーティーに参加する',()=>!!S.party]];
+function chk(){S.smb=S.smb||{};SM.forEach(m=>{if(S.streak>=m[0]&&!S.smb[m[0]]){S.smb[m[0]]=1;S.pts+=m[1];let t='';if(m[2]!=null&&!S.titles.includes(m[2])){S.titles.push(m[2]);t='　称号『'+TITLES[m[2]][0]+'』'}log('連続'+m[0]+'日ボーナス：金貨+'+m[1]);pop('【通知】','STREAK',m[0]+'日連続','金貨 +'+m[1]+t)}});S.bd=S.bd||{};BD.forEach(b=>{if(!S.bd[b[0]]&&b[4]()){S.bd[b[0]]=ymd();S.pts+=20;log('実績解除：'+b[2]);pop('【通知】','ACHIEVEMENT',(b[1][0]==='<'?'':b[1]+' ')+b[2],b[3]+'（+20pt）')}})}
 function bdg(){const u=BD.filter(b=>(S.bd||{})[b[0]]).length;return'<div class="cd"><h3>実績（'+u+'/'+BD.length+'）</h3><div class="gr g3">'+BD.map(b=>{const o=(S.bd||{})[b[0]];return'<div class="bx" style="'+(o?'border-color:var(--ac)':'opacity:.55')+'"><div style="font-size:24px">'+(o?b[1]:'🔒')+'</div><small>'+b[2]+'</small>'+(o?'':'<br><small>'+b[3]+'</small>')+'</div>'}).join('')+'</div><small>解除すると+20pt。</small></div>'}
 function cal(){const n=new Date(),y=n.getFullYear(),m=n.getMonth(),f=(new Date(y,m,1).getDay()+6)%7,dm=new Date(y,m+1,0).getDate(),t=ymd();let c='';for(let i=0;i<f;i++)c+='<i></i>';
 for(let d=1;d<=dm;d++){const k=y+'-'+String(m+1).padStart(2,'0')+'-'+String(d).padStart(2,'0'),p=k===t?(S.active?pct():null):(S.hist||{})[k];c+='<b class="cl'+(k===t?' td':'')+'" style="'+(p!=null?'background:rgba(var(--rgb),'+(.18+p/100*.62).toFixed(2)+')':'')+'">'+d+((S.rd||[]).includes(k)?'<small style="display:block;line-height:1">休</small>':'')+'</b>'}
-return'<div class="cd"><h3>継続カレンダー（'+(m+1)+'月）</h3><div class="cg">'+['月','火','水','木','金','土','日'].map(x=>'<small>'+x+'</small>').join('')+c+'</div><small>色が濃い日ほど達成率が高い日です。連続 '+S.streak+'日／最長 '+(S.best||0)+'日</small></div>'}
+return'<div class="cd"><h3>継続カレンダー（'+(m+1)+'月）</h3><div class="cg">'+['月','火','水','木','金','土','日'].map(x=>'<small>'+x+'</small>').join('')+c+'</div><small>色が濃い日ほど達成率が高い日です。連続 '+S.streak+'日／最長 '+(S.best||0)+'日'+nsb()+'</small></div>'}
 const DM=[['クエストを3つ達成',()=>S.quests.filter(q=>q.got).length>=3],['食事を3回整える',()=>['b','l','d'].every(k=>S.meals[k])],['歩数目標を達成する',()=>S.steps>=sg()],['今日の達成率70%以上',()=>pct()>=70],['今日の体重を記録',()=>S.weights.some(x=>x.d===ymd())],['全クエストを達成',()=>S.quests.length>0&&S.quests.every(q=>q.got)]];
-const WM=[['今週1,200EXPを獲得',()=>S.wx||0,1200],['今週4日以上活動する',()=>Object.keys(S.hist||{}).filter(k=>k>=wk()).length+(S.active?1:0),4],['今週体重を3回記録',()=>S.weights.filter(x=>x.d>=wk()).length,3]];
+const WMf=()=>WM0(Math.round(1200*DF().x/50)*50);const WM0=g=>[['今週'+g.toLocaleString()+'EXPを獲得',()=>S.wx||0,g],['今週4日以上活動する',()=>Object.keys(S.hist||{}).filter(k=>k>=wk()).length+(S.active?1:0),4],['今週体重を3回記録',()=>S.weights.filter(x=>x.d>=wk()).length,3]];
 function msx(){const t=ymd(),w=wk();if(!S.ms||S.ms.d!==t)S.ms={d:t,c:[]};if(!S.wm||S.wm.w!==w)S.wm={w,c:false}}
-function mis(){msx();const dn=Math.floor(Date.parse(ymd())/864e5),a=dn%6;let b=(dn*5+2)%6;if(b===a)b=(b+1)%6;const w=WM[Math.floor(Date.parse(wk())/6048e5)%3],wv=w[1]();
+function mis(){msx();const dn=Math.floor(Date.parse(ymd())/864e5),a=dn%6;let b=(dn*5+2)%6;if(b===a)b=(b+1)%6;const w=WMf()[Math.floor(Date.parse(wk())/6048e5)%3],wv=w[1]();
 const row=(id,nm,ok,rw,cl,pr)=>'<div class="rw q"><div class="g1"><div>'+nm+'</div><small>'+(pr||'')+'報酬 '+rw+'</small></div>'+(cl?'<small>受取済み</small>':'<button class="btn'+(ok?' pri':'')+' sm" '+(ok?'data-a="mc" data-k="'+id+'"':'disabled')+'>'+(ok?'受け取る':'未達成')+'</button>')+'</div>';
-return'<div class="cd"><h3>ミッション</h3><small>日替わり</small>'+[a,b].map(i=>row('d'+i,DM[i][0],DM[i][1](),'+50 EXP / +20pt',S.ms.c.includes('d'+i))).join('')+'<small style="display:block;margin-top:8px">週替わり</small>'+row('w',w[0],wv>=w[2],'+100 EXP / +150pt',S.wm.c,Math.min(wv,w[2])+' / '+w[2]+'・')+'</div>'}
+return'<div class="cd'+cl('ms')+'"><h3 '+ha('ms')+'>ミッション</h3><small>日替わり</small>'+[a,b].map(i=>row('d'+i,DM[i][0],DM[i][1](),'+50 EXP / +20pt',S.ms.c.includes('d'+i))).join('')+'<small style="display:block;margin-top:8px">週替わり</small>'+row('w',w[0],wv>=w[2],'+100 EXP / +150pt',S.wm.c,Math.min(wv,w[2])+' / '+w[2]+'・')+'</div>'}
 function snd(t){try{if(S.snd!==false){AC=AC||new (window.AudioContext||window.webkitAudioContext)();if(AC.state==='suspended')AC.resume();const n=AC.currentTime;(t==='lv'?[[523,0],[659,.12],[784,.24],[1047,.36]]:[[784,0],[1175,.09]]).forEach(x=>{const o=AC.createOscillator(),g=AC.createGain();o.type='square';o.frequency.value=x[0];g.gain.setValueAtTime(.0001,n+x[1]);g.gain.exponentialRampToValueAtTime(.05,n+x[1]+.01);g.gain.exponentialRampToValueAtTime(.0001,n+x[1]+.16);o.connect(g);g.connect(AC.destination);o.start(n+x[1]);o.stop(n+x[1]+.18)})}if(S.vib!==false&&navigator.vibrate)navigator.vibrate(t==='lv'?[40,40,80]:20)}catch(e){}}
 let AC=null;
-function rb(){const n=(S.rd||[]).filter(d=>d>=wk()).length;if(S.rest===ymd())return'<small class="warn">🌙 今日は休息日（連続記録は継続）</small>';return n<2?'<button class="btn sm" data-a="rest">🌙 今日は休む</button>':'<small>休息日は週に2回まで</small>'}
+function rb(){const n=(S.rd||[]).filter(d=>d>=wk()).length;if(S.rest===ymd())return'<small class="warn">🌙 今日は休息日（連続記録は継続）</small>';return n<DF().r?'<button class="btn sm" data-a="rest">🌙 今日は休む</button>':'<small>休息日は週に'+DF().r+'回まで</small>'}
 function warn(){const l=S.weights[S.weights.length-1];if(!l)return'';const b=new Date(l.d+'T00:00:00');b.setDate(b.getDate()-7);const lim=ymd(b),p=[...S.weights].reverse().find(x=>x.d<=lim),fast=p&&(p.w-l.w)/p.w>0.01,low=S.target&&l.w<S.target-1;
 return bmic(l)+(fast?'<div class="cd" style="border-color:var(--or)"><h3 style="color:var(--or)">⚠ 減量ペースが速めです</h3><p style="margin:0">直近1週間で体重の1%以上減っています。食事を抜かず、睡眠をとり、数日ペースを落としましょう。体調が悪い場合は医師などの専門家に相談してください。</p></div>':'')+(low?'<div class="cd" style="border-color:var(--or)"><h3 style="color:var(--or)">⚠ 目標を下回りました</h3><p style="margin:0">目標体重を超えて減っています。維持を目標に切り替えるか、目標を見直しましょう。</p></div>':'')}
 function wr(){const D=[],t=ymd();for(let i=6;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);D.push(ymd(d))}
 const hs=S.hist||{},sh=S.sh||{},ps=D.map(k=>k===t?(S.active?pct():0):(+hs[k]||0)),act=ps.filter(x=>x>0).length,avg=Math.round(ps.reduce((a,b)=>a+b,0)/7),st=D.map(k=>k===t?S.steps:(+sh[k]||0)).filter(x=>x>0),as=st.length?Math.round(st.reduce((a,b)=>a+b,0)/st.length):0,l=S.weights[S.weights.length-1],old=l&&[...S.weights].reverse().find(x=>dayMs(x.d)<=dayMs(l.d)-7*864e5),dw=l&&old?ma(l.d)-ma(old.d):null,bx=(a,b)=>'<div class="bx"><small>'+a+'</small><div class="big" style="font-size:24px">'+b+'</div></div>';
-return'<div class="cd"><h3>週間レポート（直近7日）</h3><div class="rw" style="align-items:flex-end;height:70px;gap:5px">'+ps.map((p,i)=>'<div class="g1 tc"><div style="height:'+(3+p*.5)+'px;background:linear-gradient(180deg,var(--ac),var(--p2));box-shadow:0 0 6px var(--ac);margin:0 auto 2px;width:70%"></div><small>'+'日月火水木金土'[new Date(D[i]+'T00:00:00').getDay()]+'</small></div>').join('')+'</div><div class="gr" style="margin-top:10px;grid-template-columns:1fr 1fr">'+bx('活動日数',act+' / 7')+bx('平均達成率',avg+'%')+bx('平均歩数',as?as.toLocaleString():'--')+bx('体重（7日平均）',dw==null?'--':(dw>0?'+':'')+dw.toFixed(1)+'kg')+bx('平均睡眠',(x=>x?x.toFixed(1)+'h':'--')(avd(D,k=>k===t?(S.sl||0):(+(S.slh||{})[k]||0))))+bx('平均水分',(x=>x?x.toFixed(1)+'杯':'--')(avd(D,k=>k===t?(S.water||0):(+(S.wh||{})[k]||0))))+'</div><p style="margin:10px 0 0">'+(act>=5?'素晴らしい１週間でした！この調子で続けましょう。':act>=3?'いいペースです。あと1日、活動日を増やしてみましょう。':'まずは体重の記録から再開しましょう。休息も大切です。')+'</p></div>'}
-let pdy=[0,1,2,3,4,5,6];
+return'<div class="cd"><h3>週間レポート（直近7日）</h3><div class="rw" style="align-items:flex-end;height:70px;gap:5px">'+ps.map((p,i)=>'<div class="g1 tc"><div style="height:'+(3+p*.5)+'px;background:linear-gradient(180deg,var(--ac),var(--p2));box-shadow:0 0 6px var(--ac);margin:0 auto 2px;width:70%"></div><small>'+'日月火水木金土'[new Date(D[i]+'T00:00:00').getDay()]+'</small></div>').join('')+'</div><div class="gr" style="margin-top:10px;grid-template-columns:1fr 1fr">'+bx('活動日数',act+' / 7')+bx('平均達成率',avg+'%')+bx('平均歩数',as?as.toLocaleString():'--')+bx('体重（7日平均）',dw==null?'--':(dw>0?'+':'')+dw.toFixed(1)+'kg')+bx('平均睡眠',(x=>x?x.toFixed(1)+'h':'--')(avd(D,k=>k===t?(S.sl||0):(+(S.slh||{})[k]||0))))+bx('平均水分',(x=>x?x.toFixed(1)+'杯':'--')(avd(D,k=>k===t?(S.water||0):(+(S.wh||{})[k]||0))))+bx('運動',(S.ex||[]).filter(x=>x.d>=D[0]).reduce((a,x)=>a+x.m,0)+'分')+bx('今週のEXP',(S.wx||0).toLocaleString())+'</div><p style="margin:10px 0 0">'+(act>=5?'素晴らしい１週間でした！この調子で続けましょう。':act>=3?'いいペースです。あと1日、活動日を増やしてみましょう。':'まずは体重の記録から再開しましょう。休息も大切です。')+'</p></div>'}
+let pdy=[0,1,2,3,4,5,6],qed=null;
 const TPL=[['ストレッチ10分','STR',40],['階段を使う','AGI',40],['夕食後の散歩','AGI',50],['間食を見直す','INT',40],['野菜を一品足す','INT',40],['23時までに就寝','VIT',50],['筋トレ15分','STR',60],['湯船に浸かる','VIT',40]];
 const dtx=a=>a.map(i=>'日月火水木金土'[i]).join('');
 const avd=(D,f)=>{const a=D.map(f).filter(x=>x>0);return a.length?a.reduce((p,c)=>p+c,0)/a.length:0};
-function syncq(){const d=new Date().getDay(),o=S.quests||[];S.quests=(S.all||[]).filter(q=>!q.dy||q.dy.includes(d)).map(q=>{const e=o.find(x=>x.id===q.id);return Object.assign({},q,{got:e?e.got:null})})}
-function hq(){const h=(S.all||[]).filter(q=>!S.quests.some(x=>x.id===q.id));return h.length?'<div><small>今日は表示されないクエスト</small>'+h.map(q=>'<div class="rw sp"><small>'+esc(q.t)+'（'+dtx(q.dy||[])+'）</small><button class="btn sm'+(armK==='qd2'+q.id?' dg':'')+'" data-a="qd2" data-k="'+q.id+'">'+(armK==='qd2'+q.id?'削除？':'✕')+'</button></div>').join('')+'</div>':''}
+function syncq(){const d=new Date().getDay(),o=S.quests||[];S.quests=(S.all||[]).filter(q=>!q.dy||q.dy.includes(d)||(o.find(x=>x.id===q.id)||{}).got).map(q=>{const e=o.find(x=>x.id===q.id);return Object.assign({},q,{got:e?e.got:null})})}
+function hq(){const h=(S.all||[]).filter(q=>!S.quests.some(x=>x.id===q.id));return h.length?'<div><small>今日は表示されないクエスト</small>'+h.map(q=>'<div class="rw sp"><small>'+esc(q.t)+'（'+dtx(q.dy||[])+'）</small><button class="btn sm" data-a="qe" data-k="'+q.id+'" aria-label="編集">✎</button><button class="btn sm'+(armK==='qd2'+q.id?' dg':'')+'" data-a="qd2" data-k="'+q.id+'">'+(armK==='qd2'+q.id?'削除？':'✕')+'</button></div>').join('')+'</div>':''}
 function dayc(){return'<div><small>実施する曜日（追加するクエスト用）</small><div class="fw" style="margin-top:4px">'+[0,1,2,3,4,5,6].map(i=>'<button class="btn sm'+(pdy.includes(i)?' on':'')+'" data-a="dy" data-k="'+i+'">'+'日月火水木金土'[i]+'</button>').join('')+'</div></div>'}
 function tpc(){const t=TPL.map((x,i)=>[x,i]).filter(p=>!(S.all||[]).some(q=>q.t===p[0][0]));return t.length?'<div><small>テンプレートからワンタップで追加</small><div class="fw" style="margin-top:4px">'+t.map(p=>'<button class="btn sm" data-a="tp" data-k="'+p[1]+'">＋'+esc(p[0][0])+'</button>').join('')+'</div></div>':''}
-function slw(){const w=S.water||0;return'<div class="cd"><h3>睡眠・水分</h3><div class="rw"><div class="g1">💧 水 '+w+' / 8杯<br><small>1杯約250ml（8杯で+30 EXP）</small></div><button class="btn sm" data-a="wd" data-k="-1" aria-label="1杯減らす">−</button><button class="btn pri sm" data-a="wd" data-k="1">＋1杯</button></div><div class="bar" style="margin:8px 0 12px"><i style="width:'+Math.min(100,w/8*100)+'%"></i></div><div class="gr g2"><input class="in" id="sl" type="number" step="0.5" min="0" max="16" inputmode="decimal" placeholder="昨夜の睡眠（時間）" value="'+(S.sl||'')+'"><button class="btn" data-a="sl">記録</button></div><small>😴 6時間以上で+30 EXP。</small></div>'}
+function slw(){const w=S.water||0;return'<div class="cd'+cl('sw')+'"><h3 '+ha('sw','💧'+w+'/8'+(S.sl?' 😴'+S.sl+'h':''))+'>睡眠・水分</h3><div class="rw"><div class="g1">💧 水 '+w+' / 8杯<br><small>1杯約250ml（8杯で+30 EXP）</small></div><button class="btn sm" data-a="wd" data-k="-1" aria-label="1杯減らす">−</button><button class="btn pri sm" data-a="wd" data-k="1">＋1杯</button></div><div class="bar" style="margin:8px 0 12px"><i style="width:'+Math.min(100,w/8*100)+'%"></i></div><div class="gr g2"><input class="in" id="sl" type="number" step="0.5" min="0" max="16" inputmode="decimal" placeholder="昨夜の睡眠（時間）" value="'+(S.sl||'')+'"><button class="btn" data-a="sl">記録</button></div><small>😴 6時間以上で+30 EXP。</small></div>'}
 function bmic(l){if(!S.height)return'<div class="cd"><h3>BMI</h3><p class="mu" style="margin:0 0 8px">身長を設定すると、BMIの目安と低体重の注意が表示されます。</p><button class="btn" data-a="gs">身長を設定する</button></div>';
 const bi=l.w/Math.pow(S.height/100,2),c=bi<18.5?'低体重':bi<25?'標準':'過体重',lo=bi<18.5,tb=S.target?S.target/Math.pow(S.height/100,2):null;
 return'<div class="cd"'+(lo?' style="border-color:var(--or)"':'')+'><h3>BMI</h3><div class="rw sp"><div class="big">'+bi.toFixed(1)+'</div><div style="text-align:right">'+c+'<br><small>身長 '+S.height+'cm</small></div></div>'+(lo?'<p class="warn" style="margin:8px 0 0">低体重の範囲です。これ以上の減量はおすすめしません。体調が気になる場合は、医師や管理栄養士に相談してください。</p>':'')+(tb&&tb<18.5&&!lo?'<p class="warn" style="margin:8px 0 0">目標体重のBMIが18.5を下回ります。目標の見直しをおすすめします。</p>':'')+'<small style="display:block;margin-top:6px">BMIはあくまで目安です。筋肉量などは反映されません。</small></div>'}
+const DEFC=['pd'];
+const isc=id=>{const c=S.cl||{};return id in c?!!c[id]:DEFC.includes(id)};
+const cl=id=>isc(id)?' col':'';
+const ha=(id,sm)=>'data-a="cl" data-k="'+id+'" role="button" tabindex="0" class="cs" aria-expanded="'+!isc(id)+'" data-s="'+esc(sm||'')+'"';
+function wfix(){S.weights.sort((a,b)=>a.d<b.d?-1:a.d>b.d?1:0);S.start=S.weights.length?S.weights[0].w:null}
+function pdc(){const D=[];for(let i=1;i<=7;i++){const d=new Date();d.setDate(d.getDate()-i);D.push(ymd(d))}
+return'<div class="cd'+cl('pd')+'"><h3 '+ha('pd','昨日以前')+'>過去の記録を追加・修正</h3><div class="gr"><input class="in" id="pdd" type="date" max="'+D[0]+'" value="'+D[0]+'"><div class="gr g3"><input class="in" id="pds" type="number" inputmode="numeric" placeholder="歩数"><input class="in" id="pdl" type="number" step="0.5" inputmode="decimal" placeholder="睡眠h"><input class="in" id="pdw" type="number" inputmode="numeric" placeholder="水（杯）"></div><button class="btn pri" data-a="pds">保存する</button></div><small>入れた項目だけ保存・上書きします。0を入れると消えます。過去の分はEXPなし。</small>'+D.map(k=>{const s=(S.sh||{})[k],l=(S.slh||{})[k],w=(S.wh||{})[k];return'<div class="rw q"><span class="g1">'+k.slice(5).replace('-','/')+'　👣'+(s?s.toLocaleString():'-')+'　😴'+(l?l+'h':'-')+'　💧'+(w||'-')+'</span><button class="btn sm" data-a="pde" data-k="'+k+'">編集</button></div>'}).join('')+'</div>'}
+let ts='do',mt='rp';
+const seg=(a,l,c)=>'<div class="seg" role="tablist">'+l.map(x=>'<button role="tab" aria-selected="'+(x[0]===c)+'" class="'+(x[0]===c?'on':'')+'" data-a="'+a+'" data-k="'+x[0]+'">'+x[1]+'</button>').join('')+'</div>';
+function fl(s,t){return'<svg class="fl'+(t||'')+'" width="'+s+'" height="'+s+'" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5C13 5.5 19 8 19 14C19 18.4 15.9 21.8 12 21.8C8.1 21.8 5 18.4 5 14C5 11.5 6.3 9.7 7.8 8.2C8 10.2 8.9 11.4 10.2 11.8C9.6 7.8 10.2 4.5 12 1.5Z" fill="url(#gf)"/><path d="M12 21C9.9 21 8.3 19.3 8.3 17.1C8.3 15.4 9.5 14.4 10.3 12.9C10.7 14 11.3 14.5 12 14.7C12.5 13.6 12.8 12.6 12.6 11.4C14.2 12.7 15.7 14.4 15.7 17.1C15.7 19.3 14.1 21 12 21Z" fill="#fff3b8"/></svg>'}
+const BA={d:'<path d="M50 14 60 24 80 12 74 40C82 58 72 82 50 90 28 82 18 58 26 40L20 12 40 24Z"/><path class="e" d="M31 48 46 52 34 59ZM69 48 54 52 66 59Z"/><path class="t" d="M34 71 40 78 45 71 50 80 55 71 60 78 66 71M50 28 54 38 50 44 46 38Z"/>',w:'<path d="M50 6 56 16 64 5 61 22 58 29 63 33 97 10 85 28 95 38 79 44 88 58 69 55 61 66 67 84 74 95 61 89 55 79 53 93 50 99 47 93 45 79 39 89 26 95 33 84 39 66 31 55 12 58 21 44 5 38 15 28 3 10 37 33 42 29 39 22 36 5 44 16Z"/><path class="e" d="M45 12 49 14 45 16ZM55 12 51 14 55 16Z"/><path class="t" d="M50 22 50 70M58 40 76 34M42 40 24 34"/>',h:'<path d="M50 8C28 16 20 40 22 62L14 90 86 90 78 62C80 40 72 16 50 8Z"/><path class="v" d="M50 28C38 32 33 46 37 62 43 70 57 70 63 62 67 46 62 32 50 28Z"/><circle class="e" cx="43" cy="50" r="3.4"/><circle class="e" cx="57" cy="50" r="3.4"/>',G:'<path d="M28 14H72V40H82V70H66V90H34V70H18V40H28Z"/><path class="e" d="M34 44H46V52H34ZM54 44H66V52H54Z"/><path class="t" d="M38 72H62M44 72V82M50 72V82M56 72V82M50 14 46 28 52 34 48 40"/>',P:'<path d="M50 10C30 10 22 28 22 50V90L32 80 41 91 50 80 59 91 68 80 78 90V50C78 28 70 10 50 10Z"/><path class="e" d="M34 40Q40 32 46 40Q46 50 40 54Q34 50 34 40ZM54 40Q60 32 66 40Q66 50 60 54Q54 50 54 40Z"/><path class="t" d="M42 66Q50 74 58 66"/>'};
+function ba(k,c,dead){return'<div class="bart'+(dead?' dead':'')+'" style="--bc:'+c+'"><svg class="bs" viewBox="0 0 100 100" role="img" aria-label="ボス">'+(BA[k]||'')+'</svg></div>'}
+const DIFF={e:{n:'かんたん',x:2,p:1,b:1.5,r:3,d:'Lv.100まで約3か月（目安）・1日の目安 約10分・休息日は週に3回'},n:{n:'ふつう',x:1,p:1,b:1,r:2,d:'Lv.100まで約6か月（目安）・1日の目安 約15分・休息日は週に2回'},h:{n:'むずかしい',x:.5,p:1.5,b:.65,r:1,d:'Lv.100まで約1年（目安）・1日の目安 約25分・金貨1.5倍・休息日は週に1回'}};
+const DF=()=>DIFF[S.diff]||DIFF.n;
+function setdf(k){if(!DIFF[k])return;const o=bm();S.diff=k;S.boss.hp=Math.max(0,Math.round(S.boss.hp/o*bm()));save()}
+function dfb(a){return Object.keys(DIFF).map(k=>'<button class="btn'+((S.diff||'n')===k?' on':'')+'" data-a="'+a+'" data-k="'+k+'" style="text-align:left"><b>'+DIFF[k].n+'</b><br><small>'+DIFF[k].d+'</small></button>').join('')}
+let obp=0,OBF=null,OBQ=[],OBA='',OBRS='';
+const DISC='※医療的なアドバイスではありません。体調を最優先にし、気になる症状があるときは医師に相談してください。';
+const AVS=['🗡️','🏹','🪄','🛡️','🐺','🐉'];
+const PQ={ex:['運動を増やしたい',[['筋トレ15分','STR',60],['ウォーキング20分','AGI',50]]],fd:['食事を整えたい',[['間食を見直す','INT',40],['野菜を一品足す','INT',40]]],sl:['睡眠を整えたい',[['23時までに就寝','VIT',50],['水を2L飲む','VIT',40]]]};
+function applyQ(){const l=[];OBQ.forEach(k=>PQ[k]&&PQ[k][1].forEach(x=>l.push(x)));if(!l.length)return;S.quests.forEach(q=>{if(q.got){revoke(q.got);q.got=null}});S.all=l.slice(0,10).map((x,i)=>({id:'q'+Date.now()+i,t:x[0],stat:x[1],exp:x[2],dy:null}));syncq()}
+function tl(w,t){const d=w-t;if(!(d>0))return'';const mn=Math.max(1,Math.round(d/(w*.01)/4.345)),mx=Math.max(mn,Math.round(d/(w*.005)/4.345));return'約'+mn+(mx>mn?'〜'+mx:'')+'か月'}
+function obfb(){const f=$('#obfb');if(!f)return;const w=parseFloat($('#obw').value),t=parseFloat($('#obt').value),h=parseFloat($('#obh').value),o=[];
+if(w>=20&&t>=20){const d=w-t;if(d>0){o.push('あと '+d.toFixed(1)+'kg ／ 目安：'+tl(w,t)+'（週に体重の0.5〜1%のペース）');if(d/w>.15)o.push('<span class="warn">大きな減量です。段階的な目標も検討しましょう。</span>')}else o.push('現在の体重以上の目標です（維持が目標になります）')}
+if(h>=100&&h<=230){if(w>=20)o.push('現在のBMI '+(w/Math.pow(h/100,2)).toFixed(1));if(t>=20){const b=t/Math.pow(h/100,2);o.push('目標のBMI '+b.toFixed(1)+(b<18.5?' <span class="warn">18.5を下回ります。目標の見直しをおすすめします。</span>':''))}}
+f.innerHTML=o.join('<br>')}
+function obx(){const pb=n=>'<div class="ovk" style="text-align:center">STEP '+n+' / 4</div><div class="bar" style="margin:4px 0 8px"><i style="width:'+n*25+'%"></i></div>',W='<div class="ovb" style="margin:auto;text-align:left">',nav=(a,l)=>'<div style="display:flex;gap:8px;margin-top:12px"><button class="btn" data-a="obbk" style="flex:1">戻る</button><button class="btn pri" data-a="'+a+'" style="flex:2">'+l+'</button></div>',T=t=>'<div class="ovt" style="font-size:22px;text-align:center">'+t+'</div>',row=(a,b)=>'<div class="rw sp" style="padding:5px 0;border-top:1px solid var(--ln)"><small>'+a+'</small><b style="text-align:right">'+b+'</b></div>';
+if(obp===0)return W+'<div style="text-align:center">'+ba('w','#d9482e')+'<div class="ovt">冒険を始めよう</div><p class="mu" style="text-align:center">毎日の小さな習慣が、あなたをレベルアップさせます。体重・食事・睡眠を記録して、ボスに挑みましょう。</p></div><button class="btn pri" data-a="obst" style="width:100%;margin-top:8px">はじめる</button><button class="btn" data-a="obrs" style="width:100%;margin-top:8px">以前のデータを復元する</button><p class="mu" style="margin:10px 0 0;text-align:center">'+DISC+'</p></div>';
+if(obp==='r')return W+T('データの復元')+'<p class="mu">書き出したデータ（「ハンター」→「設定」の「書き出す」でコピーしたもの）を貼り付けてください。</p><textarea class="in" id="obio" placeholder="ここに貼り付け"></textarea><div style="display:flex;gap:8px;margin-top:10px"><button class="btn" data-a="obbk" style="flex:1">戻る</button><button class="btn pri" data-a="obim" style="flex:2">読み込む</button></div></div>';
+if(OBF===null)OBF=S.focus||'';
+if(obp===2)return W+pb(2)+T('冒険のスタイル')+'<p class="mu">難易度と、伸ばしたい能力を選びましょう。難易度はあとから設定で変えられます。</p><small>難易度</small><div class="gr" style="grid-template-columns:1fr;gap:6px;margin:2px 0 12px">'+dfb('obd')+'</div><small>伸ばしたい能力（任意）</small><div class="fw" style="margin:4px 0">'+['','STR','AGI','INT','VIT'].map(k=>'<button class="btn sm'+(OBF===k?' on':'')+'" data-a="obf" data-k="'+k+'">'+(k?SN[k]:'おまかせ')+'</button>').join('')+'</div><small style="display:block">選んだ能力が最初から少し伸び、Lv.5の天職になりやすくなります。</small>'+nav('obn2','次へ')+'</div>';
+if(obp===3){const av=OBA||S.av||AVS[0];return W+pb(3)+T('最初の準備')+'<small>いま力を入れたいこと（複数選べます）</small><div class="fw" style="margin:4px 0">'+Object.keys(PQ).map(k=>'<button class="btn sm'+(OBQ.includes(k)?' on':'')+'" data-a="obq" data-k="'+k+'">'+PQ[k][0]+'</button>').join('')+'</div><small style="display:block;margin-bottom:10px">選ぶと、最初のクエストがそれに合わせて用意されます。選ばなければおまかせです'+(S.ob0?'（選ぶと今のクエストが置き換わります）':'')+'。</small><small>アイコン</small><div class="fw" style="margin:4px 0 10px">'+AVS.map(v=>'<button class="btn sm'+(av===v?' on':'')+'" data-a="oba" data-k="'+v+'">'+v+'</button>').join('')+'</div><label><small>目標の理由（ひとこと・任意）</small><input class="in" id="obr" maxlength="30" placeholder="例：夏までに旅行を楽しみたい" value="'+esc(OBRS||S.reason||'')+'"></label>'+nav('obn3','次へ')+'</div>'}
+if(obp===4){const w=S.weights.length?S.weights[S.weights.length-1].w:0,t=S.target||0,q=OBQ.length?OBQ.flatMap(k=>PQ[k][1].map(x=>x[0])):S.all.map(x=>x.t),av=OBA||S.av||AVS[0],tm=tl(w,t);return W+pb(4)+T('冒険の書')+'<p class="mu" style="text-align:center">この内容で始めますか？</p>'+row('名前',av+' '+esc(S.name))+row('体重',w+' → '+t+' kg'+(tm?'（'+tm+'）':''))+row('歩数目標',sg().toLocaleString()+'歩')+row('難易度',DF().n)+row('伸ばしたい能力',OBF?SN[OBF]:'おまかせ')+row('最初のクエスト',esc(q.join('、')))+(OBRS?row('目標の理由',esc(OBRS)):'')+'<p class="mu" style="margin:8px 0 0">'+DISC+'</p>'+nav('obgo','この内容で始める')+'</div>'}
+return''}
+function obr(){const e=$('#ob');if(S.ob===undefined&&(S.weights.length||S.lv>1||S.exp))S.ob=true;if(S.ob){e.classList.remove('s');return}if(e.classList.contains('s'))return;
+if(obp!==1){e.innerHTML=obx();e.classList.add('s');return}
+const lw=S.weights.length?S.weights[S.weights.length-1].w:'',sgv=sg();
+e.innerHTML='<div class="ovb" style="margin:auto;text-align:left"><div class="ovk" style="text-align:center">STEP 1 / 4</div><div class="bar" style="margin:4px 0 8px"><i style="width:25%"></i></div><div class="ovt" style="font-size:22px;text-align:center">あなたのこと</div><div class="gr"><label><small>名前</small><input class="in" id="obn" maxlength="12" value="'+esc(S.name)+'"></label><label><small>現在の体重（kg）</small><input class="in" id="obw" type="number" step="0.1" inputmode="decimal" value="'+lw+'"></label><label><small>目標体重（kg）</small><input class="in" id="obt" type="number" step="0.1" inputmode="decimal" value="'+(S.target||'')+'"></label><label style="grid-column:1/-1"><small>身長（cm・任意）</small><input class="in" id="obh" type="number" step="0.1" inputmode="decimal" value="'+(S.height||'')+'"></label><div style="grid-column:1/-1"><small>1日の歩数目標</small><input type="hidden" id="obs" value="'+sgv+'"><div class="fw" style="margin-top:4px">'+[...new Set([5000,8000,10000,12000,sgv])].sort((a,b)=>a-b).map(v=>'<button class="btn sm'+(v===sgv?' on':'')+'" data-a="obsg" data-k="'+v+'">'+v.toLocaleString()+'</button>').join('')+'</div></div><div id="obfb" class="mu" style="grid-column:1/-1"></div><button class="btn pri" data-a="obnx">次へ</button><button class="btn" data-a="obsk">あとで設定する</button></div><p class="mu" style="margin:10px 0 0">'+DISC+'</p></div>';e.classList.add('s');obfb()}
+const sb=k=>Math.min(.4,Math.max(0,((S.stats[k]||1)-1)*.005));
+const SM=[[7,100,null],[14,200,null],[30,500,10],[60,800,null],[100,1500,11]];
+const nsb=()=>{const m=SM.find(x=>!(S.smb||{})[x[0]]);return m?' ／ 次のボーナス '+m[0]+'日（金貨'+m[1]+'）':''};
+function sbt(){const p=k=>'+'+Math.round(sb(k)*100)+'%';return'<small style="display:block;margin-top:8px;line-height:1.7">筋力 '+p('STR')+'：ボスへのダメージ<br>俊敏 '+p('AGI')+'：歩く系のEXP<br>知恵 '+p('INT')+'：食事・知恵系のEXP<br>活力 '+p('VIT')+'：睡眠・水分・活力系のEXP<br>（1ポイントにつき+0.5%、最大+40%）</small>'}
+function ffb(){return['','STR','AGI','INT','VIT'].map(k=>'<button class="btn sm'+((S.focus||'')===k?' on':'')+'" data-a="sf" data-k="'+k+'">'+(k?SN[k]:'なし')+'</button>').join('')}
+function bkc(){const n=S.lastBk?Math.floor((Date.now()-S.lastBk)/864e5):(S.since?Math.floor((Date.now()-Date.parse(S.since))/864e5):0);if(n<7)return'';return'<div class="cd" style="border-color:var(--or)"><div class="rw"><div class="g1"><b>💾 バックアップのお知らせ</b><br><small>'+(S.lastBk?n+'日':'まだ一度も')+'バックアップしていません。ブラウザのデータが消えると記録も消えます。</small></div><button class="btn pri sm" data-a="gs">保存する</button></div></div>'}
+const wsel=()=>{const r=S.wr===undefined?30:S.wr,m=r?ymd(new Date(Date.now()-r*864e5)):'';return S.weights.filter(x=>!m||x.d>=m).slice(-180)};
+const rgc=()=>'<div class="fw" style="margin-bottom:8px">'+[[7,'1週間'],[30,'1か月'],[0,'全期間']].map(x=>'<button class="btn sm'+((S.wr===undefined?30:S.wr)===x[0]?' on':'')+'" data-a="wrg" data-k="'+x[0]+'">'+x[1]+'</button>').join('')+'</div>';
+const EXT=[['ウォーキング','AGI'],['ランニング','AGI'],['サイクリング','AGI'],['筋トレ','STR'],['ストレッチ','VIT'],['水泳','VIT'],['その他','STR']];
+function exc(){const t=ymd(),l=(S.ex||[]).filter(x=>x.d===t);return'<div class="cd'+cl('ex')+'"><h3 '+ha('ex',l.reduce((a,x)=>a+x.m,0)+'分')+'>運動の記録</h3><div class="gr g2"><select class="in" id="ext">'+EXT.map((x,i)=>'<option value="'+i+'">'+x[0]+'</option>').join('')+'</select><input class="in" id="exm" type="number" inputmode="numeric" placeholder="時間（分）" style="width:130px"></div><button class="btn pri" data-a="ex2" style="width:100%;margin-top:8px">記録する</button><small style="display:block;margin:6px 0">1分＝1EXP（1日80EXPまで）。</small>'+l.map(x=>'<div class="rw q"><span class="g1">'+EXT[x.t][0]+' '+x.m+'分　<small>+'+(x.g?x.g.exp:0)+' EXP</small></span><button class="btn sm'+(armK==='exd'+x.id?' dg':'')+'" data-a="exd" data-k="'+x.id+'">'+(armK==='exd'+x.id?'削除？':'✕')+'</button></div>').join('')+'</div>'}
 function party(){const H=(t,b)=>'<div class="cd"><h3>'+t+'</h3>'+b+'</div>';
 if(!window.claude)return H('パーティー','<p class="mu" style="margin:0">パーティー機能は公開ページでのみ使えます。</p>');
 if(!DB)return H('パーティー','<p class="mu" style="margin:0">読み込み中です。ログインしていない場合は使えません。</p>');
 if(!S.party)return H('パーティーを作る','<p class="mu">仲間と週間レイドボスを倒し、エールを送り合えます。仲間にはこのページの共有設定で「コントリビューター」以上の権限が必要です。</p><button class="btn pri" style="width:100%" data-a="pc">新しいパーティーを作る</button>')+H('パーティーに参加','<div class="gr g2"><input class="in" id="pcode" maxlength="6" placeholder="6桁のコード" style="text-transform:uppercase"><button class="btn" data-a="pj">参加</button></div>');
 const r=raid(),RB=RAIDS[Math.floor(Date.parse(wk())/6048e5)%3],w0=wk(),ms=[...pm].sort((a,b)=>(b.wk===w0?+b.wx||0:0)-(a.wk===w0?+a.wx||0:0));
 let h=H('パーティーコード','<div class="rw sp"><div class="big" style="letter-spacing:.2em">'+esc(S.party)+'</div><button class="btn sm'+(armK==='pl'?' dg':'')+'" data-a="pl">'+(armK==='pl'?'脱退する？':'脱退')+'</button></div><small>このコードを仲間に伝えて参加してもらいましょう。</small>');
-h+=H('レイドボス：'+RB[0],'<div style="font-size:44px;text-align:center">'+RB[1]+'</div><div class="bar or" style="margin:8px 0 4px"><i style="width:'+r.hp/r.mx*100+'%"></i></div><div class="rw sp"><small>HP '+r.hp+' / '+r.mx+'（全員の今週のEXPがダメージ）</small>'+(r.hp===0?(S.rc===w0?'<small>報酬受取済み</small>':'<button class="btn pri sm" data-a="rc">報酬を受け取る</button>'):'')+'</div>');
-h+=H('メンバー（'+ms.length+'）',ms.length?ms.map(x=>{const me=x.id===UID,wx=x.wk===w0?+x.wx||0:0;return'<div class="rw q"><div style="font-size:24px">'+esc(x.j||'🌱')+'</div><div class="g1"><div>'+esc(x.n||'冒険者')+(/^[EDCBAS]$/.test(x.rk)?'<span class="rk r'+x.rk+'">'+x.rk+'</span>':'')+(me?' <small>（あなた）</small>':'')+'</div><small>Lv.'+(+x.lv||1)+' ・🔥'+(+x.st||0)+'日 ・今週 '+wx+' EXP</small></div>'+(me?'':'<button class="btn sm" data-a="ck" data-k="'+esc(x.id)+'">📣 エール</button>')+'</div>'}).join(''):'<p class="mu" style="margin:0">読み込み中です…</p>');
+h+=H('レイドボス：'+RB[0],ba(RB[1],'#b48cff',r.hp===0)+'<div class="bar or" style="margin:8px 0 4px"><i style="width:'+r.hp/r.mx*100+'%"></i></div><div class="rw sp"><small>HP '+r.hp+' / '+r.mx+'（全員の今週のEXPがダメージ）</small>'+(r.hp===0?(S.rc===w0?'<small>報酬受取済み</small>':'<button class="btn pri sm" data-a="rc">報酬を受け取る</button>'):'')+'</div>');
+h+=H('メンバー（'+ms.length+'）',ms.length?ms.map(x=>{const me=x.id===UID,wx=x.wk===w0?+x.wx||0:0;return'<div class="rw q"><div style="font-size:24px">'+esc(x.j||'🌱')+'</div><div class="g1"><div>'+esc(x.n||'冒険者')+(/^[EDCBAS]$/.test(x.rk)?'<span class="rk r'+x.rk+'">'+x.rk+'</span>':'')+(me?' <small>（あなた）</small>':'')+'</div><small>Lv.'+(+x.lv||1)+' ・'+fl(13)+(+x.st||0)+'日 ・今週 '+wx+' EXP</small></div>'+(me?'':'<button class="btn sm" data-a="ck" data-k="'+esc(x.id)+'">📣 エール</button>')+'</div>'}).join(''):'<p class="mu" style="margin:0">読み込み中です…</p>');
 return h}
 function R(keep){const y=scrollY,v={};if(keep)document.querySelectorAll('#mn input,#mn select,#mn textarea').forEach(e=>{if(e.id)v[e.id]=e.value});hd();$('#mn').innerHTML={today,body,party,shop,me}[tab]();for(const i in v){const e=document.getElementById(i);if(e)e.value=v[i]}scrollTo(0,y);
-$('#nv').innerHTML=[['today','▣','クエスト'],['body','◈','身体'],['party','◎','パーティー'],['shop','◆','ショップ'],['me','▤','ステータス']].map(x=>'<button data-a="tab" data-k="'+x[0]+'" class="'+(tab===x[0]?'cur':'')+'"><b>'+x[1]+'</b>'+x[2]+'</button>').join('')}
+$('#nv').innerHTML=[['today','⚔','クエスト'],['body','♥','身体'],['party','⚑','パーティー'],['shop','◆','アイテム'],['me','▤','ハンター']].map(x=>'<button data-a="tab" data-k="'+x[0]+'" class="'+(tab===x[0]?'cur':'')+'"><b>'+x[1]+'</b>'+x[2]+'</button>').join('')}
 document.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(b)act(b.dataset.a,b.dataset.k,b)});
 document.addEventListener('visibilitychange',()=>{if(!document.hidden){rollover();R(true)}});
+document.addEventListener('input',e=>{if(e.target&&['obw','obt','obh'].includes(e.target.id))obfb()});
+document.addEventListener('keydown',e=>{const t=e.target;if((e.key==='Enter'||e.key===' ')&&t.dataset&&t.getAttribute&&t.getAttribute('role')==='button'){e.preventDefault();act(t.dataset.a,t.dataset.k,t)}});
 document.addEventListener('keydown',e=>{if(e.key!=='Enter'||e.isComposing)return;const m={qt:'qadd',wi:'w',st:'steps',rt:'radd',rc:'radd',tg:'tg',nm:'nm'}[e.target.id];if(m){e.preventDefault();act(m)}});
 rollover();R();obr();pinit();
 })();
